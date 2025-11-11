@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [Win32, x64]
+        platform: [win64]
         configuration: [Release]
 
     steps:
@@ -50,9 +50,6 @@ jobs:
           $outDir = Join-Path (Resolve-Path .) "artifacts\${{ matrix.platform }}\${{ matrix.configuration }}"
           New-Item -ItemType Directory -Force -Path $outDir | Out-Null
           $patterns = @(
-            "Release\*.exe",
-            "Release\*.dll",
-            "Release\*.pdb",
             "x64\Release\*.exe",
             "x64\Release\*.dll",
             "x64\Release\*.pdb",

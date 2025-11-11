@@ -7,55 +7,55 @@ MessageId = 501
 SymbolicName = NSSM_MESSAGE_USAGE
 Severity = Informational
 Language = English
-NSSM: The non-sucking service manager
-Version %s %s, %s
-Usage: nssm <option> [<args> ...]
+NSSM：稳定可靠的服务管理器
+版本 %s %s，%s
+用法：nssm <选项> [<参数> ...]
 
-To show service installation GUI:
+显示服务安装 GUI：
 
-        nssm install [<servicename>]
+        nssm install [<服务名>]
 
-To install a service without confirmation:
+无需确认直接安装服务：
 
-        nssm install <servicename> <app> [<args> ...]
+        nssm install <服务名> <可执行程序> [<参数> ...]
 
-To show service editing GUI:
+显示服务编辑 GUI：
 
-        nssm edit <servicename>
+        nssm edit <服务名>
 
-To retrieve or edit service parameters directly:
+直接导出/读取/设置参数：
 
-        nssm dump <servicename>
+        nssm dump <服务名>
 
-        nssm get <servicename> <parameter> [<subparameter>]
+        nssm get <服务名> <参数> [<子参数>]
 
-        nssm set <servicename> <parameter> [<subparameter>] <value>
+        nssm set <服务名> <参数> [<子参数>] <值>
 
-        nssm reset <servicename> <parameter> [<subparameter>]
+        nssm reset <服务名> <参数> [<子参数>]
 
-To show service removal GUI:
+显示服务移除 GUI：
 
-        nssm remove [<servicename>]
+        nssm remove [<服务名>]
 
-To remove a service without confirmation:
+无需确认直接移除服务：
 
-        nssm remove <servicename> confirm
+        nssm remove <服务名> confirm
 
-To manage a service:
+管理服务：
 
-        nssm start <servicename>
+        nssm start <服务名>
 
-        nssm stop <servicename>
+        nssm stop <服务名>
 
-        nssm restart <servicename>
+        nssm restart <服务名>
 
-        nssm status <servicename>
+        nssm status <服务名>
 
-        nssm statuscode <servicename>
+        nssm statuscode <服务名>
 
-        nssm rotate <servicename>
+        nssm rotate <服务名>
 
-        nssm processes <servicename>
+        nssm processes <服务名>
 .
 
 
@@ -63,7 +63,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_INSTALL
 Severity = Informational
 Language = English
-Administrator access is needed to install a service.
+安装服务需要管理员权限。
 .
 
 
@@ -71,7 +71,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_EDIT
 Severity = Informational
 Language = English
-Administrator access is needed to edit a service.
+编辑服务需要管理员权限。
 .
 
 
@@ -79,7 +79,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_REMOVE
 Severity = Informational
 Language = English
-Administrator access is needed to remove a service.
+移除服务需要管理员权限。
 .
 
 
@@ -87,7 +87,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_PRE_REMOVE_SERVICE
 Severity = Informational
 Language = English
-To remove a service without confirmation: nssm remove <servicename> confirm
+无需确认直接移除：nssm remove <服务名> confirm
 .
 
 
@@ -95,7 +95,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_OUT_OF_MEMORY
 Severity = Error
 Language = English
-Out of memory for %s in %s!
+在 %2 中为 %1 分配内存失败！
 .
 
 
@@ -103,7 +103,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_OPEN_SERVICE_MANAGER_FAILED
 Severity = Informational
 Language = English
-Error opening service manager!
+打开服务管理器失败！
 .
 
 
@@ -111,8 +111,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_QUERYSERVICECONFIG_FAILED
 Severity = Informational
 Language = English
-Error querying service "%s"!
-QueryServiceConfig(): %s
+查询服务“%1”失败！
+QueryServiceConfig()：%2
 .
 
 
@@ -120,8 +120,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_QUERYSERVICECONFIG2_FAILED
 Severity = Informational
 Language = English
-Error querying service "%s"!
-QueryServiceConfig2(%s): %s
+查询服务“%1”失败！
+QueryServiceConfig2(%2)：%3
 .
 
 
@@ -129,8 +129,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_SERVICE
 Severity = Informational
 Language = English
-Service "%s" is not a valid %s service!
-Executable is %s
+服务“%1”不是有效的 %2 服务！
+可执行文件为 %3
 .
 
 
@@ -138,7 +138,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CANNOT_EDIT
 Severity = Informational
 Language = English
-Service "%s" is not a %s service!
+服务“%1”不是 %2 服务！
 .
 
 
@@ -146,7 +146,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_PATH_TOO_LONG
 Severity = Informational
 Language = English
-The full path to %s is too long!
+指向 %1 的完整路径过长！
 .
 
 
@@ -154,7 +154,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_FLAGS_TOO_LONG
 Severity = Informational
 Language = English
-The program flags are too long!
+程序参数过长！
 .
 
 
@@ -162,7 +162,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_OUT_OF_MEMORY_FOR_IMAGEPATH
 Severity = Informational
 Language = English
-Out of memory for ImagePath!
+为 ImagePath 分配内存失败！
 .
 
 
@@ -170,8 +170,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CREATESERVICE_FAILED
 Severity = Informational
 Language = English
-Error creating service!
-CreateService(): %s
+创建服务失败！
+CreateService()：%1
 .
 
 
@@ -179,7 +179,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_GRANTED_LOGON_AS_SERVICE
 Severity = Informational
 Language = English
-The "Log on as a service" right was granted to account %s.
+已为账户 %1 授予“作为服务登录”的权限。
 .
 
 
@@ -187,7 +187,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_GRANT_LOGON_AS_SERVICE_FAILED
 Severity = Informational
 Language = English
-Failed to grant the "Log on as a service" right to account %s!
+为账户 %1 授予“作为服务登录”权限失败！
 .
 
 
@@ -195,7 +195,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_LSAOPENPOLICY_FAILED
 Severity = Informational
 Language = English
-LsaOpenPolicy(): %s
+LsaOpenPolicy()：%1
 .
 
 
@@ -203,8 +203,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_LSALOOKUPNAMES_FAILED
 Severity = Informational
 Language = English
-Failed to look up the SID for username %s!
-LsaLookupNames(): %s
+查询用户名 %1 的 SID 失败！
+LsaLookupNames()：%2
 .
 
 
@@ -212,8 +212,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INITIALIZESID_FAILED
 Severity = Informational
 Language = English
-Failed to initialise the SID for username %s!
-InitializeSid(): %s
+初始化用户名 %1 的 SID 失败！
+InitializeSid()：%2
 .
 
 
@@ -221,8 +221,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_LSAENUMERATEACCOUNTRIGHTS_FAILED
 Severity = Informational
 Language = English
-Failed to check if %s has the "Log on as a service" right!
-LsaEnumerateAccountRights(): %s
+检查 %1 是否具有“作为服务登录”权限失败！
+LsaEnumerateAccountRights()：%2
 .
 
 
@@ -230,7 +230,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_LSAADDACCOUNTRIGHTS_FAILED
 Severity = Informational
 Language = English
-LsaAddAccountRights(): %s
+LsaAddAccountRights()：%1
 .
 
 
@@ -238,8 +238,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CHANGESERVICECONFIG_FAILED
 Severity = Informational
 Language = English
-Error editing service!
-ChangeServiceConfig(): %s
+编辑服务失败！
+ChangeServiceConfig()：%1
 .
 
 
@@ -247,8 +247,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SETVALUE_FAILED
 Severity = Error
 Language = English
-Failed to write registry value %s:
-RegSetValueEx(): %s
+写入注册表值 %1 失败：
+RegSetValueEx()：%2
 .
 
 
@@ -256,8 +256,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_REGDELETEVALUE_FAILED
 Severity = Informational
 Language = English
-Error deleting registry value %s for service "%s"!
-RegDeleteValue(): %s
+删除服务“%2”的注册表值 %1 失败！
+RegDeleteValue()：%3
 .
 
 
@@ -265,7 +265,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_PARAMETER
 Severity = Informational
 Language = English
-Invalid parameter "%s".  Valid parameters are:
+无效参数“%1”。可用参数为：
 .
 
 
@@ -273,7 +273,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_MISSING_SUBPARAMETER
 Severity = Informational
 Language = English
-Parameter "%s" requires a subparameter!
+参数“%1”需要子参数！
 .
 
 
@@ -281,7 +281,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_NATIVE_PARAMETER
 Severity = Informational
 Language = English
-Parameter "%s" is only valid for services managed by %s!
+参数“%1”仅适用于由 %2 管理的服务！
 .
 
 
@@ -289,7 +289,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_NO_DEFAULT_VALUE
 Severity = Informational
 Language = English
-Parameter "%s" has no meaningful default value!
+参数“%1”没有有意义的默认值！
 .
 
 
@@ -297,7 +297,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_GET_SETTING_FAILED
 Severity = Informational
 Language = English
-Error getting parameter "%s" for service "%s"!
+获取服务“%2”的参数“%1”失败！
 .
 
 
@@ -305,7 +305,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SET_SETTING_FAILED
 Severity = Informational
 Language = English
-Error setting parameter "%s" for service "%s"!
+设置服务“%2”的参数“%1”失败！
 .
 
 
@@ -313,7 +313,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SET_SETTING
 Severity = Informational
 Language = English
-Set parameter "%s" for service "%s".
+已为服务“%2”设置参数“%1”。
 .
 
 
@@ -321,7 +321,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_RESET_SETTING
 Severity = Informational
 Language = English
-Reset parameter "%s" for service "%s" to its default.
+已将服务“%2”的参数“%1”重置为默认值。
 .
 
 
@@ -329,7 +329,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_EXIT_ACTION
 Severity = Informational
 Language = English
-Invalid exit action "%s".  Valid exit actions are:
+无效的退出动作“%1”。可用退出动作为：
 .
 
 
@@ -337,7 +337,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_SERVICE_TYPE
 Severity = Informational
 Language = English
-Invalid service type "%s".  Valid types are:
+无效的服务类型“%1”。可用类型为：
 .
 
 
@@ -345,8 +345,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SERVICE_CONFIG_DELAYED_AUTO_START_INFO_FAILED
 Severity = Informational
 Language = English
-Error configuring delayed startup for service "%s".  The service will start automatically.
-ChangeServiceConfig2(): %s
+为服务“%1”配置延迟自动启动失败；该服务将以自动启动方式运行。
+ChangeServiceConfig2()：%2
 .
 
 
@@ -354,7 +354,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_SERVICE_STARTUP
 Severity = Informational
 Language = English
-Invalid startup type "%s".  Valid types are:
+无效的启动类型“%1”。可用类型为：
 .
 
 
@@ -362,7 +362,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_PRIORITY
 Severity = Informational
 Language = English
-Invalid process priority "%s".  Valid priorities are:
+无效的进程优先级“%1”。可用优先级为：
 .
 
 
@@ -370,7 +370,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_MISSING_PASSWORD
 Severity = Informational
 Language = English
-Setting "%s" requires both a username and password!
+设置“%1”需要同时提供用户名和密码！
 .
 
 
@@ -378,8 +378,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INTERACTIVE_NOT_LOCALSYSTEM
 Severity = Informational
 Language = English
-Service type "%s" is invalid for service "%s".
-Only services running under the %s account may be interactive.
+服务类型“%1”不适用于服务“%2”。
+只有以 %3 账户运行的服务才可为交互式。
 .
 
 
@@ -387,7 +387,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CREATE_PARAMETERS_FAILED
 Severity = Informational
 Language = English
-Error setting startup parameters for the service!
+为服务设置启动参数失败！
 .
 
 
@@ -395,7 +395,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SERVICE_INSTALLED
 Severity = Informational
 Language = English
-Service "%s" installed successfully!
+服务“%1”安装成功！
 .
 
 
@@ -403,8 +403,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_OPENSERVICE_FAILED
 Severity = Informational
 Language = English
-Can't open service!
-OpenService(): %s
+无法打开服务！
+OpenService()：%1
 .
 
 
@@ -412,8 +412,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_ENUMSERVICESSTATUS_FAILED
 Severity = Informational
 Language = English
-Can't open service!
-EnumServicesStatus(): %s
+无法打开服务！
+EnumServicesStatus()：%1
 .
 
 
@@ -421,7 +421,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_DELETESERVICE_FAILED
 Severity = Informational
 Language = English
-Error deleting service!
+删除服务失败！
 .
 
 
@@ -429,7 +429,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SERVICE_REMOVED
 Severity = Informational
 Language = English
-Service "%s" removed successfully!
+服务“%1”移除成功！
 .
 
 
@@ -437,7 +437,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_SERVICE_EDITED
 Severity = Informational
 Language = English
-Service "%s" edited successfully!
+服务“%1”编辑成功！
 .
 
 
@@ -445,7 +445,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CANNOT_RENAME_SERVICE
 Severity = Informational
 Language = English
-Services cannot be renamed!
+服务不支持重命名！
 .
 
 
@@ -453,10 +453,10 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_EFFECTIVE_AFFINITY_MASK
 Severity = Informational
 Language = English
-Requested processor affinity range %s is not appropriate.
-The maximal affinity range is %s on this system.
-The requested affinity will be written to the registry as-is.
-Note, however, that the effective affinity will be %s.
+请求的处理器亲和性范围 %1 不合适。
+本机最大可用范围为 %2。
+请求的亲和性将原样写入注册表，
+但实际生效的范围将是 %3。
 .
 
 
@@ -464,9 +464,9 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_BOGUS_AFFINITY_MASK
 Severity = Informational
 Language = English
-Affinity specification "%s" is invalid.
-Valid specifications are of the form "0-2,4-6,10,15"
-Identifiers must be in the range 0-%d on this system.
+亲和性规格“%1”无效。
+有效格式示例：“0-2,4-6,10,15”
+在本机上可用的编号范围为 0-%2。
 .
 
 
@@ -474,7 +474,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_BAD_CONTROL_RESPONSE
 Severity = Informational
 Language = English
-%s: Unexpected status %s in response to %s control.
+%1：收到对 %3 控制的异常状态 %2。
 .
 
 
@@ -482,8 +482,8 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_LSALOOKUPSIDS_FAILED
 Severity = Informational
 Language = English
-Failed to look up the username for SID.
-LsaLookupSids(): %s
+查询 SID 的用户名失败。
+LsaLookupSids()：%1
 .
 
 
@@ -491,7 +491,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_CREATEWELLKNOWNSID_FAILED
 Severity = Informational
 Language = English
-Failed to create %s SID!
+创建 %1 SID 失败！
 .
 
 
@@ -499,7 +499,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_HOOK_EVENT
 Severity = Informational
 Language = English
-Invalid hook event.  Valid hook events are:
+无效的钩子事件。可用事件有：
 .
 
 
@@ -507,7 +507,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_HOOK_ACTION
 Severity = Informational
 Language = English
-Invalid hook action for event %s.  Valid hook actions are:
+事件 %1 的钩子动作无效。可用动作有：
 .
 
 
@@ -515,7 +515,7 @@ MessageId = +1
 SymbolicName = NSSM_MESSAGE_INVALID_HOOK_NAME
 Severity = Informational
 Language = English
-Invalid hook name.  Names should be specified in the form <event>/<action>.
+无效的钩子名称。名称格式应为 <事件>/<动作>。
 .
 
 
@@ -1080,7 +1080,7 @@ MessageId = 1001
 SymbolicName = NSSM_EVENT_DISPATCHER_FAILED
 Severity = Error
 Language = English
-StartServiceCtrlDispatcher() failed:
+StartServiceCtrlDispatcher() 失败：
 %1
 .
 
@@ -1089,8 +1089,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_OPENSCMANAGER_FAILED
 Severity = Error
 Language = English
-Unable to connect to service manager!
-Perhaps you need to be an administrator...
+无法连接到服务管理器！
+可能需要管理员权限……
 .
 
 
@@ -1098,7 +1098,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_OUT_OF_MEMORY
 Severity = Error
 Language = English
-Out of memory for %1 in %2!
+在 %2 中为 %1 分配内存失败！
 .
 
 
@@ -1106,7 +1106,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GET_PARAMETERS_FAILED
 Severity = Error
 Language = English
-Failed to get startup parameters for service %1.
+获取服务 %1 的启动参数失败。
 .
 
 
@@ -1114,7 +1114,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_REGISTERSERVICECTRLHANDER_FAILED
 Severity = Error
 Language = English
-RegisterServiceCtrlHandlerEx() failed:
+RegisterServiceCtrlHandlerEx() 失败：
 %1
 .
 
@@ -1123,8 +1123,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_START_SERVICE_FAILED
 Severity = Error
 Language = English
-Can't start %1 for service %2.
-Error code: %3.
+无法为服务 %2 启动 %1。
+错误码：%3。
 .
 
 
@@ -1132,8 +1132,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_RESTART_SERVICE_FAILED
 Severity = Warning
 Language = English
-Failed to restart %1 for service %2.
-Sleeping...
+为服务 %2 重启 %1 失败。
+等待中……
 .
 
 
@@ -1141,7 +1141,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_STARTED_SERVICE
 Severity = Informational
 Language = English
-Started %1 %2 for service %3 in %4.
+已为服务 %3 启动 %1 %2，用时 %4。
 .
 
 
@@ -1149,8 +1149,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_REGISTERWAITFORSINGLEOBJECT_FAILED
 Severity = Warning
 Language = English
-Service %1 may claim to be still running when %2 exits.
-RegisterWaitForSingleObject() failed:
+当 %2 退出时，服务 %1 可能仍声称在运行。
+RegisterWaitForSingleObject() 失败：
 %3
 .
 
@@ -1159,8 +1159,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATEPROCESS_FAILED
 Severity = Error
 Language = English
-Failed to start service %1.  Program %2 couldn't be launched.
-CreateProcess() failed:
+启动服务 %1 失败。无法启动程序 %2。
+CreateProcess() 失败：
 %3
 .
 
@@ -1169,7 +1169,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_TERMINATEPROCESS
 Severity = Informational
 Language = English
-Killing process %2 because service %1 is stopping.
+由于服务 %1 正在停止，正在终止进程 %2。
 .
 
 
@@ -1177,7 +1177,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_PROCESS_ALREADY_STOPPED
 Severity = Informational
 Language = English
-Requested stop of service %1.  No action is required as program %2 is not running.
+已请求停止服务 %1。由于程序 %2 未在运行，无需执行操作。
 .
 
 
@@ -1185,7 +1185,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_ENDED_SERVICE
 Severity = Informational
 Language = English
-Program %1 for service %2 exited with return code %3.
+服务 %2 的程序 %1 已退出，返回码 %3。
 .
 
 
@@ -1193,8 +1193,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EXIT_RESTART
 Severity = Informational
 Language = English
-Service %1 action for exit code %2 is %3.
-Attempting to restart %4.
+服务 %1 的退出码 %2 对应动作为 %3。
+正在尝试重启 %4。
 .
 
 
@@ -1202,8 +1202,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EXIT_IGNORE
 Severity = Informational
 Language = English
-Service %1 action for exit code %2 is %3.
-No action will be taken to restart %4.
+服务 %1 的退出码 %2 对应动作为 %3。
+不会对 %4 执行重启操作。
 .
 
 
@@ -1211,8 +1211,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EXIT_REALLY
 Severity = Informational
 Language = English
-Service %1 action for exit code %2 is %3.
-Exiting.
+服务 %1 的退出码 %2 对应动作为 %3。
+正在退出。
 .
 
 
@@ -1220,7 +1220,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_OPENKEY_FAILED
 Severity = Error
 Language = English
-Failed to open registry key HKLM\%1:
+打开注册表键 HKLM\%1 失败：
 %2
 .
 
@@ -1229,7 +1229,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_QUERYVALUE_FAILED
 Severity = Error
 Language = English
-Failed to read registry value %1:
+读取注册表值 %1 失败：
 %2
 .
 
@@ -1238,7 +1238,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SETVALUE_FAILED
 Severity = Error
 Language = English
-Failed to write registry value %1:
+写入注册表值 %1 失败：
 %2
 .
 
@@ -1247,8 +1247,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EXIT_UNCLEAN
 Severity = Informational
 Language = English
-Service %1 action for exit code %2 is %3.
-Exiting.
+服务 %1 的退出码 %2 对应动作为 %3。
+正在退出。
 .
 
 
@@ -1256,9 +1256,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GRACEFUL_SUICIDE
 Severity = Informational
 Language = English
-Service %1 application %2 exited with exit code 0 but the default exit action is %3.
-Honouring the %4 action would result in the service being flagged as failed and subject to recovery actions.
-The service will instead be stopped gracefully.  To suppress this message, explicitly configure the exit action for exit code 0 to either %5 or %6.
+服务 %1 的应用 %2 以退出码 0 退出，但默认退出动作为 %3。
+若执行 %4 动作，将导致服务被标记为失败并触发恢复策略。
+因此将改为优雅停止该服务。要抑制此消息，请将退出码 0 的退出动作显式配置为 %5 或 %6。
 .
 
 
@@ -1266,7 +1266,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EXPANDENVIRONMENTSTRINGS_FAILED
 Severity = Error
 Language = English
-Failed to expand registry value %1:
+展开注册表值 %1 失败：
 %2
 .
 
@@ -1275,7 +1275,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_KILLING
 Severity = Informational
 Language = English
-Killing process tree of process %2 for service %1 with exit code %3
+正在终止服务 %1 的进程树（根 PID %2），退出码 %3
 .
 
 
@@ -1283,7 +1283,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATETOOLHELP32SNAPSHOT_PROCESS_FAILED
 Severity = Error
 Language = English
-Failed to create snapshot of running processes when terminating service %1:
+终止服务 %1 时创建进程快照失败：
 %2
 .
 
@@ -1292,7 +1292,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_PROCESS_ENUMERATE_FAILED
 Severity = Error
 Language = English
-Failed to enumerate running processes when terminating service %1:
+终止服务 %1 时枚举进程失败：
 %2
 .
 
@@ -1301,7 +1301,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_OPENPROCESS_FAILED
 Severity = Error
 Language = English
-Failed to open process handle for process with PID %1 when terminating service %2:
+终止服务 %2 时，打开 PID %1 的进程句柄失败：
 %3
 .
 
@@ -1310,7 +1310,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_KILL_PROCESS_TREE
 Severity = Informational
 Language = English
-Killing PID %1 in process tree of PID %2 because service %3 is stopping.
+由于服务 %3 正在停止，正在终止进程树 PID %2 下的 PID %1。
 .
 
 
@@ -1318,7 +1318,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_TERMINATEPROCESS_FAILED
 Severity = Error
 Language = English
-Failed to terminate process with PID %1 for service %2:
+终止服务 %2 的 PID %1 失败：
 %3
 .
 
@@ -1327,8 +1327,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_NO_FLAGS
 Severity = Warning
 Language = English
-Registry key %1 is unset for service %2.
-No flags will be passed to %3 when it starts.
+服务 %2 的注册表键 %1 未设置。
+启动 %3 时将不传递任何参数。
 .
 
 
@@ -1336,8 +1336,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_NO_DIR
 Severity = Warning
 Language = English
-Registry key %1 is unset for service %2.
-Assuming startup directory %3.
+服务 %2 的注册表键 %1 未设置。
+假定启动目录为 %3。
 .
 
 
@@ -1345,8 +1345,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_NO_DIR_AND_NO_FALLBACK
 Severity = Error
 Language = English
-Registry key %1 is unset for service %2.
-Additionally, ExpandEnvironmentStrings("%%SYSTEMROOT%%") failed when trying to choose a fallback startup directory.
+服务 %2 的注册表键 %1 未设置。
+此外，尝试选择回退启动目录时 ExpandEnvironmentStrings("%%SYSTEMROOT%%") 失败。
 .
 
 
@@ -1354,7 +1354,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATETOOLHELP32SNAPSHOT_THREAD_FAILED
 Severity = Error
 Language = English
-Failed to create snapshot of running threads when terminating service %1:
+终止服务 %1 时创建线程快照失败：
 %2
 .
 
@@ -1363,7 +1363,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_THREAD_ENUMERATE_FAILED
 Severity = Error
 Language = English
-Failed to enumerate running threads when terminating service %1:
+终止服务 %1 时枚举线程失败：
 %2
 .
 
@@ -1372,8 +1372,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_THROTTLED
 Severity = Warning
 Language = English
-Service %1 ran for less than %2 milliseconds.
-Restart will be delayed by %3 milliseconds.
+服务 %1 运行时间少于 %2 毫秒。
+重启将延迟 %3 毫秒。
 .
 
 
@@ -1381,7 +1381,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_RESET_THROTTLE
 Severity = Informational
 Language = English
-Request to resume service %1.  Throttling of restart attempts will be reset.
+收到恢复服务 %1 的请求。将重置重启节流。
 .
 
 
@@ -1389,7 +1389,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_THROTTLE
 Severity = Warning
 Language = English
-The registry value %2, used to specify the minimum number of milliseconds which must elapse before service %1 is considered to have started successfully, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+注册表值 %2（指定服务 %1 被认为成功启动所需的最少毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 
@@ -1397,9 +1397,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATEWAITABLETIMER_FAILED
 Severity = Warning
 Language = English
-Failed to create waitable timer for service %1:
+为服务 %1 创建可等待定时器失败：
 %2
-Throttled restarts will not be interruptible.
+节流重启将无法被中断。
 .
 
 
@@ -1407,8 +1407,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATEPROCESS_FAILED_INVALID_ENVIRONMENT
 Severity = Error
 Language = English
-Failed to start service %1.  Program %2 couldn't be launched.
-CreateProcess() failed with ERROR_INVALID_PARAMETER and a process environment was set in the %3 registry value.  It is likely that the environment was incorrectly specified.  %3 should be a REG_MULTI_SZ value comprising strings of the form KEY=VALUE.
+启动服务 %1 失败。无法启动程序 %2。
+CreateProcess() 因 ERROR_INVALID_PARAMETER 失败，且注册表值 %3 设置了进程环境。
+很可能是环境格式不正确。%3 必须为 REG_MULTI_SZ，包含若干形如 KEY=VALUE 的字符串。
 .
 
 
@@ -1416,7 +1417,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_INVALID_ENVIRONMENT_STRING_TYPE
 Severity = Warning
 Language = English
-Environment declaration %1 for service %2 is not of type REG_MULTI_SZ and will be ignored.
+服务 %2 的环境声明 %1 不是 REG_MULTI_SZ 类型，将被忽略。
 .
 
 
@@ -1424,7 +1425,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONTROL_HANDLED
 Severity = Informational
 Language = English
-Service %1 received %2 control, which will be handled.
+服务 %1 收到控制码 %2，将予以处理。
 .
 
 
@@ -1432,7 +1433,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONTROL_NOT_HANDLED
 Severity = Informational
 Language = English
-Service %1 received unsupported %2 control, which will not be handled.
+服务 %1 收到不支持的控制码 %2，将不会处理。
 .
 
 
@@ -1440,7 +1441,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONTROL_UNKNOWN
 Severity = Informational
 Language = English
-Service %1 received unknown service control message %2, which will be ignored.
+服务 %1 收到未知服务控制消息 %2，将被忽略。
 .
 
 
@@ -1448,8 +1449,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONFIG_FAILURE_ACTIONS_FAILED
 Severity = Informational
 Language = English
-Error configuring service failure actions for service %1.  The service will not be subject to recovery actions if it exits gracefully with a non-zero exit code.
-ChangeServiceConfig2() failed:
+为服务 %1 配置失败动作出错。
+如果服务以非零退出码“正常”退出，将不再触发恢复策略。
+ChangeServiceConfig2() 失败：
 %2
 .
 
@@ -1458,7 +1460,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GETPROCESSTIMES_FAILED
 Severity = Error
 Language = English
-GetProcessTimes() failed:
+GetProcessTimes() 失败：
 %1
 .
 
@@ -1467,8 +1469,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_ATTACHCONSOLE_FAILED
 Severity = Error
 Language = English
-Error attaching to console for service %1.
-AttachConsole() failed:
+为服务 %1 附加控制台失败。
+AttachConsole() 失败：
 %2
 .
 
@@ -1477,8 +1479,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SETCONSOLECTRLHANDLER_FAILED
 Severity = Error
 Language = English
-Error setting null handler for Control-C events sent to service %1.
-SetConsoleCtrlHandler() failed:
+为服务 %1 设置 Control-C 事件空处理程序失败。
+SetConsoleCtrlHandler() 失败：
 %2
 .
 
@@ -1487,8 +1489,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GENERATECONSOLECTRLEVENT_FAILED
 Severity = Error
 Language = English
-Error generating Control-C event for service %1.
-GenerateConsoleCtrlEvent() failed:
+为服务 %1 生成 Control-C 事件失败。
+GenerateConsoleCtrlEvent() 失败：
 %2
 .
 
@@ -1497,8 +1499,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_FREECONSOLE_FAILED
 Severity = Warning
 Language = English
-Error detaching from console for service %1.
-FreeConsole() failed:
+为服务 %1 释放控制台失败。
+FreeConsole() 失败：
 %2
 .
 
@@ -1507,7 +1509,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATEFILE_FAILED
 Severity = Error
 Language = English
-CreateFile() failed to open %1:
+CreateFile() 打开 %1 失败：
 %2
 .
 
@@ -1516,8 +1518,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_DUPLICATEHANDLE_FAILED
 Severity = Error
 Language = English
-Error duplicating the filehandle previously opened for %1 as %2.
-DuplicateHandle() failed:
+将已为 %1 打开的文件句柄复制为 %2 时出错。
+DuplicateHandle() 失败：
 %3
 .
 
@@ -1526,7 +1528,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GET_OUTPUT_HANDLES_FAILED
 Severity = Error
 Language = English
-Error setting up one or more I/O filehandles.  Service %1 will not be started.
+配置一个或多个 I/O 文件句柄时出错。服务 %1 将不会启动。
 .
 
 
@@ -1534,7 +1536,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_STOP_METHOD_SKIP
 Severity = Warning
 Language = English
-The registry value %2, used to specify the method(s) by which %3 will skip when attempting to stop service %1, was not of type REG_DWORD.  All available methods will be used.
+注册表值 %2（指定在尝试停止服务 %1 时 %3 将跳过的方法）不是 REG_DWORD 类型。将使用所有可用方法。
 .
 
 
@@ -1542,9 +1544,10 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_PROCESS_STILL_ACTIVE
 Severity = Warning
 Language = English
-The service %1 is stopping but PID %2 is still running.
-Usually %3 will call TerminateProcess() as a last resort to ensure that the process is stopped but the registry value %4 has been set and not all process termination methods have been attempted.
-It will no longer be possible to attempt to control the application and the service will report a stopped status.
+服务 %1 正在停止，但 PID %2 仍在运行。
+通常 %3 会在最后手段调用 TerminateProcess() 以确保进程被终止，
+但由于已设置注册表值 %4，未尝试所有终止方法。
+将无法继续尝试控制该应用，服务将报告已停止状态。
 .
 
 
@@ -1552,8 +1555,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_LOADLIBRARY_FAILED
 Severity = Warning
 Language = English
-Error loading the %1 DLL!
-LoadLibrary() failed:
+加载 %1 DLL 时出错！
+LoadLibrary() 失败：
 %2
 .
 
@@ -1562,7 +1565,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GETPROCADDRESS_FAILED
 Severity = Warning
 Language = English
-GetProcAddress(%1) failed:
+GetProcAddress(%1) 失败：
 %2
 .
 
@@ -1571,7 +1574,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_KILL_CONSOLE_GRACE_PERIOD
 Severity = Warning
 Language = English
-The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after sending a Control-C event, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+注册表值 %2（指定向服务 %1 发送 Control-C 后等待其停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 
@@ -1579,7 +1582,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD
 Severity = Warning
 Language = English
-The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a WM_CLOSE message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+注册表值 %2（指定向应用窗口投递 WM_CLOSE 后等待服务 %1 停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 
@@ -1587,7 +1590,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD
 Severity = Warning
 Language = English
-The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a WM_QUIT message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+注册表值 %2（指定向应用管理的线程消息队列投递 WM_QUIT 后等待服务 %1 停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 
@@ -1595,8 +1598,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_AWAITING_SHUTDOWN
 Severity = Informational
 Language = English
-%1 has waited %3 of %5 milliseconds for the %2 service to exit.
-Next update in %4 milliseconds.
+%1 已等待 %3/%5 毫秒以等待服务 %2 退出。
+下一次更新在 %4 毫秒后。
 .
 
 
@@ -1604,7 +1607,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATETHREAD_FAILED
 Severity = Error
 Language = English
-CreateThread() failed:
+CreateThread() 失败：
 %1
 .
 
@@ -1613,7 +1616,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_STARTUP_DELAY_TOO_LONG
 Severity = Informational
 Language = English
-The minimum number of milliseconds which must pass before service %1 is considered to have been started successfully is set to %2.  Access to the Windows service control manager is blocked until the service updates its status, therefore %3 will wait a maximum of %4 milliseconds before reporting the service's state as running.  Service restart throttling will be enforced if the service runs for less than the full %2 milliseconds.
+将服务 %1 视为成功启动所需的最少毫秒数被设置为 %2。
+在服务上报状态前，访问服务控制管理器会被阻塞，因此 %3 最多等待 %4 毫秒后报告服务为“正在运行”。
+若服务实际运行少于 %2 毫秒，则会触发重启节流。
 .
 
 
@@ -1621,7 +1626,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SETENVIRONMENTVARIABLE_FAILED
 Severity = Warning
 Language = English
-SetEnvironmentVariable(%1=%2) failed:
+SetEnvironmentVariable(%1=%2) 失败：
 %3
 .
 
@@ -1630,8 +1635,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_ROTATE_FILE_FAILED
 Severity = Error
 Language = English
-Failed to rotate output file %2 for service %1.
-%3 failed for file %4:
+为服务 %1 轮转输出文件 %2 失败。
+%3 失败（文件 %4）：
 %5
 .
 
@@ -1640,8 +1645,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONFIG_DESCRIPTION_FAILED
 Severity = Informational
 Language = English
-Error setting description for service %1.
-ChangeServiceConfig2() failed:
+为服务 %1 设置描述失败。
+ChangeServiceConfig2() 失败：
 %2
 .
 
@@ -1650,8 +1655,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SERVICE_CONFIG_DELAYED_AUTO_START_INFO_FAILED
 Severity = Informational
 Language = English
-Error configuring delayed startup for service %1.  The service will start automatically.
-ChangeServiceConfig2() failed:
+为服务 %1 配置延迟自动启动失败；该服务将以自动启动方式运行。
+ChangeServiceConfig2() 失败：
 %2
 .
 
@@ -1660,10 +1665,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_PRIORITY
 Severity = Informational
 Language = English
-The registry value %2, used to specify the priority class for service %1, was not valid.
-%2 should be of type REG_DWORD and correspond to a valid argument to the
-SetPriorityClass() function.
-Service %1 will be started with normal priority.
+注册表值 %2（指定服务 %1 的优先级类）无效。
+%2 应为 REG_DWORD，并对应 SetPriorityClass() 的有效参数。
+服务 %1 将以“正常”优先级启动。
 .
 
 
@@ -1671,8 +1675,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_AFFINITY_MASK
 Severity = Warning
 Language = English
-Requested affinity range %2 is invalid.
-Service %1 will be allowed to run on any CPU.
+请求的亲和性范围 %2 无效。
+服务 %1 将允许在任意 CPU 上运行。
 .
 
 
@@ -1680,9 +1684,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_EFFECTIVE_AFFINITY_MASK
 Severity = Warning
 Language = English
-Requested processor affinity range %2 is not appropriate.
-The maximal affinity range is %3 on this system.
-Service %1 will run with an affinity range of %4.
+请求的处理器亲和性范围 %2 不合适。
+本机最大可用范围为 %3。
+服务 %1 将以 %4 的亲和性范围运行。
 .
 
 
@@ -1690,8 +1694,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GETPROCESSAFFINITYMASK_FAILED
 Severity = Warning
 Language = English
-Failed to determine an appropriate affinity mask for service %1.
-GetProcessAffinityMask(): %2
+无法为服务 %1 获取合适的亲和性掩码。
+GetProcessAffinityMask()：%2
 .
 
 
@@ -1699,8 +1703,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SETPROCESSAFFINITYMASK_FAILED
 Severity = Error
 Language = English
-Failed to set requested affinity mask for service %1.
-SetProcessAffinityMask(): %2
+为服务 %1 设置请求的亲和性掩码失败。
+SetProcessAffinityMask()：%2
 .
 
 
@@ -1708,8 +1712,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_BOGUS_RESTART_DELAY
 Severity = Warning
 Language = English
-The registry value %2, used to specify the number of milliseconds by which restarts of service %1 will be delayed, was not of type REG_DWORD.
-No mandatory delay will be employed.
+注册表值 %2（指定服务 %1 的重启延迟毫秒数）不是 REG_DWORD 类型。
+将不会采用强制延迟。
 .
 
 
@@ -1717,7 +1721,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_RESTART_DELAY
 Severity = Informational
 Language = English
-Restart of service %1 will be delayed by %2 milliseconds.
+服务 %1 的重启将延迟 %2 毫秒。
 .
 
 
@@ -1725,9 +1729,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_CREATEPIPE_FAILED
 Severity = Error
 Language = English
-Failed to set up a pipe to read output from service %1.
-Rotation of log file %2 will not be possible while the service is running.
-CreatePipe(): %3
+为读取服务 %1 的输出创建管道失败。
+在服务运行期间将无法轮转日志文件 %2。
+CreatePipe()：%3
 .
 
 
@@ -1735,9 +1739,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_READFILE_FAILED
 Severity = Error
 Language = English
-Failed to read output for service %1.
-If the error persists, no more data will be written to %2.
-ReadFile(): %3
+读取服务 %1 的输出失败。
+如果错误持续发生，将不再向 %2 写入更多数据。
+ReadFile()：%3
 .
 
 
@@ -1745,9 +1749,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_WRITEFILE_FAILED
 Severity = Error
 Language = English
-Failed to write output for service %1 to file %2.
-If the error persists, some data may be lost.
-WriteFile(): %3
+将服务 %1 的输出写入文件 %2 失败。
+如果错误持续发生，可能会丢失部分数据。
+WriteFile()：%3
 .
 
 
@@ -1755,10 +1759,9 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_SOMEBODY_SET_UP_US_THE_BOM
 Severity = Warning
 Language = English
-Output from service %1 was detected as being in UTF-16 format but an attempt to write an appropriate byte order marker failed.
-It is likely that subsequent attempts to write data to %2 will fail.  If they succeed, the file may not be recognised as being
-in UTF-16 format by applications which attempt to read it.
-WriteFile(): %3
+检测到服务 %1 的输出为 UTF-16，但写入相应的字节序标记（BOM）失败。
+后续向 %2 写入数据的尝试很可能失败；即使成功，该文件也可能不会被读取它的应用识别为 UTF-16 格式。
+WriteFile()：%3
 .
 
 
@@ -1766,7 +1769,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_ROTATED
 Severity = Informational
 Language = English
-Rotated output file %2 for service %1 to %3.
+已将服务 %1 的输出文件 %2 轮转为 %3。
 .
 
 
@@ -1774,8 +1777,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_AWAITING_SINGLE_HANDLE
 Severity = Informational
 Language = English
-%1 has waited %3 of %5 milliseconds for the %2 handle.
-Next update in %4 milliseconds.
+%1 已等待 %3/%5 毫秒以等待句柄 %2。
+下一次更新在 %4 毫秒后。
 .
 
 
@@ -1783,8 +1786,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_PRESTART_HOOK_ABORT
 Severity = Informational
 Language = English
-The %1/%2 hook for service %3 returned exit code %4.
-Service startup will be aborted.
+服务 %3 的 %1/%2 钩子返回退出码 %4。
+服务启动将被中止。
 .
 
 
@@ -1792,8 +1795,8 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_HOOK_CREATEPROCESS_FAILED
 Severity = Informational
 Language = English
-Failed to run %1/%2 hook for service %3.  Program %4 couldn't be launched.
-CreateProcess() failed:
+运行服务 %3 的 %1/%2 钩子失败。无法启动程序 %4。
+CreateProcess() 失败：
 %5
 .
 
@@ -1802,7 +1805,7 @@ MessageId = +1
 SymbolicName = NSSM_EVENT_GET_HOOK_FAILED
 Severity = Informational
 Language = English
-Failed to find a command for the %1/%2 hook for service %3 in the registry.
+在注册表中未找到服务 %3 的 %1/%2 钩子命令。
 .
 
 

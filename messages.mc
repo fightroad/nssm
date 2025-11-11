@@ -1,7 +1,7 @@
 ﻿LanguageNames =
 (
 English=0x0409:MSG00409
-"Chinese (Simplified)"=0x0804:MSG00804
+ChineseSimplified=0x0804:MSG00804
 )
 
 MessageId = 501
@@ -717,7 +717,7 @@ Severity = Informational
 Language = English
 Application%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 应用程序%0
 .
 
@@ -728,7 +728,7 @@ Severity = Informational
 Language = English
 Service%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 服务%0
 .
 
@@ -739,7 +739,7 @@ Severity = Informational
 Language = English
 Details%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 详情%0
 .
 
@@ -750,7 +750,7 @@ Severity = Informational
 Language = English
 Log on%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 登录%0
 .
 
@@ -761,7 +761,7 @@ Severity = Informational
 Language = English
 Dependencies%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 依赖%0
 .
 
@@ -772,7 +772,7 @@ Severity = Informational
 Language = English
 Process%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 进程%0
 .
 
@@ -783,7 +783,7 @@ Severity = Informational
 Language = English
 Shutdown%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 关闭%0
 .
 
@@ -794,7 +794,7 @@ Severity = Informational
 Language = English
 Exit actions%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 退出操作%0
 .
 
@@ -805,7 +805,7 @@ Severity = Informational
 Language = English
 I/O%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 I/O%0
 .
 
@@ -816,7 +816,7 @@ Severity = Informational
 Language = English
 File rotation%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 文件轮转%0
 .
 
@@ -827,7 +827,7 @@ Severity = Informational
 Language = English
 Environment%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 环境变量%0
 .
 
@@ -838,7 +838,7 @@ Severity = Informational
 Language = English
 Hooks%0
 .
-Language = Chinese (Simplified)
+Language = ChineseSimplified
 事件钩子%0
 .
 

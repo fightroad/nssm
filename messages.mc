@@ -1,7 +1,7 @@
 ﻿LanguageNames =
 (
 English=0x0409:MSG00409
-ChineseSimplified=0x0804:MSG00804
+Chinese (Simplified)=0x0804:MSG00804
 )
 
 MessageId = 501

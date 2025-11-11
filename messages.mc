@@ -1,7 +1,6 @@
 ﻿LanguageNames =
 (
 English=0x0409:MSG00409
-ChineseSimplified=0x0804:MSG00804
 )
 
 MessageId = 501
@@ -715,9 +714,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_APPLICATION
 Severity = Informational
 Language = English
-Application%0
-.
-Language = ChineseSimplified
 应用程序%0
 .
 
@@ -726,9 +722,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_NATIVE
 Severity = Informational
 Language = English
-Service%0
-.
-Language = ChineseSimplified
 服务%0
 .
 
@@ -737,9 +730,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_DETAILS
 Severity = Informational
 Language = English
-Details%0
-.
-Language = ChineseSimplified
 详情%0
 .
 
@@ -748,9 +738,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_LOGON
 Severity = Informational
 Language = English
-Log on%0
-.
-Language = ChineseSimplified
 登录%0
 .
 
@@ -759,9 +746,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_DEPENDENCIES
 Severity = Informational
 Language = English
-Dependencies%0
-.
-Language = ChineseSimplified
 依赖%0
 .
 
@@ -770,9 +754,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_PROCESS
 Severity = Informational
 Language = English
-Process%0
-.
-Language = ChineseSimplified
 进程%0
 .
 
@@ -781,9 +762,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_SHUTDOWN
 Severity = Informational
 Language = English
-Shutdown%0
-.
-Language = ChineseSimplified
 关闭%0
 .
 
@@ -792,9 +770,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_EXIT
 Severity = Informational
 Language = English
-Exit actions%0
-.
-Language = ChineseSimplified
 退出操作%0
 .
 
@@ -805,18 +780,12 @@ Severity = Informational
 Language = English
 I/O%0
 .
-Language = ChineseSimplified
-I/O%0
-.
 
 
 MessageId = +1
 SymbolicName = NSSM_GUI_TAB_ROTATION
 Severity = Informational
 Language = English
-File rotation%0
-.
-Language = ChineseSimplified
 文件轮转%0
 .
 
@@ -825,9 +794,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_ENVIRONMENT
 Severity = Informational
 Language = English
-Environment%0
-.
-Language = ChineseSimplified
 环境变量%0
 .
 
@@ -836,9 +802,6 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_HOOKS
 Severity = Informational
 Language = English
-Hooks%0
-.
-Language = ChineseSimplified
 事件钩子%0
 .
 

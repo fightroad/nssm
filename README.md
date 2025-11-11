@@ -4,6 +4,13 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 
 ![NSSM 界面](doc/界面.png)
 
+### 版本说明
+本仓库基于 NSSM 原作（作者 Iain Patterson，上游网站：[nssm.cc](https://nssm.cc/)），遵循 Public Domain 许可。
+在原版基础上主要进行了：
+- 中文本地化（GUI 与消息文本）
+
+核心功能与命令行参数保持与原版兼容；如需原版发布与英文文档，请参见上游站点。
+
 ## 构建方式
 ### 1) GitHub Actions（推荐，手动触发）
 仓库已提供工作流：`.github/workflows/build.yml`。默认仅构建 64 位 Release，并收集产物到 GitHub Artifacts。

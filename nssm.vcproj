@@ -28,11 +28,11 @@
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			>
-			<Tool
-				Name="VCPreBuildEventTool"
-				Description="Setting version information"
-				CommandLine="version.cmd"
-			/>
+            <Tool
+                Name="VCPreBuildEventTool"
+                Description="Setting version information"
+                CommandLine=""
+            />
 			<Tool
 				Name="VCCustomBuildTool"
 				Description=""
@@ -122,11 +122,11 @@
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			>
-			<Tool
-				Name="VCPreBuildEventTool"
-				Description="Setting version information"
-				CommandLine="version.cmd"
-			/>
+            <Tool
+                Name="VCPreBuildEventTool"
+                Description="Setting version information"
+                CommandLine=""
+            />
 			<Tool
 				Name="VCCustomBuildTool"
 				Description=""
@@ -217,11 +217,11 @@
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			>
-			<Tool
-				Name="VCPreBuildEventTool"
-				Description="Setting version information"
-				CommandLine="version.cmd"
-			/>
+            <Tool
+                Name="VCPreBuildEventTool"
+                Description="Setting version information"
+                CommandLine=""
+            />
 			<Tool
 				Name="VCCustomBuildTool"
 				Description=""
@@ -314,11 +314,11 @@
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			>
-			<Tool
-				Name="VCPreBuildEventTool"
-				Description="Setting version information"
-				CommandLine="version.cmd"
-			/>
+            <Tool
+                Name="VCPreBuildEventTool"
+                Description="Setting version information"
+                CommandLine=""
+            />
 			<Tool
 				Name="VCCustomBuildTool"
 				Description=""

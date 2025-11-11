@@ -31,14 +31,6 @@ jobs:
           if (-not (Test-Path $devenv)) { throw "devenv not found at $devenv" }
           "devenv=$devenv" >> $env:GITHUB_OUTPUT
 
-      - name: Prepare version info
-        shell: cmd
-        run: version.cmd
-
-      - name: Upgrade solution to current toolset
-        shell: cmd
-        run: "\"${{ steps.vs.outputs.devenv }}\" nssm.sln /Upgrade"
-
       - name: Build solution (MSBuild)
         shell: cmd
         run: msbuild.exe nssm.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m
@@ -52,13 +44,7 @@ jobs:
           $patterns = @(
             "out\Release\win64\*.exe",
             "out\Release\win64\*.dll",
-            "out\Release\win64\*.pdb",
-            "x64\Release\*.exe",
-            "x64\Release\*.dll",
-            "x64\Release\*.pdb",
-            "${{ matrix.platform }}\${{ matrix.configuration }}\*.exe",
-            "${{ matrix.platform }}\${{ matrix.configuration }}\*.dll",
-            "${{ matrix.platform }}\${{ matrix.configuration }}\*.pdb"
+            "out\Release\win64\*.pdb"
           )
           foreach ($p in $patterns) {
             Get-ChildItem -Path $p -ErrorAction SilentlyContinue | Copy-Item -Destination $outDir -Force -ErrorAction SilentlyContinue

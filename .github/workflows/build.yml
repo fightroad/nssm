@@ -31,9 +31,9 @@ jobs:
           if (-not (Test-Path $devenv)) { throw "devenv not found at $devenv" }
           "devenv=$devenv" >> $env:GITHUB_OUTPUT
 
-      - name: Build solution (MSBuild)
+      - name: Build solution (devenv)
         shell: cmd
-        run: msbuild.exe nssm.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m
+        run: "\"${{ steps.vs.outputs.devenv }}\" nssm.sln /Build \"${{ matrix.configuration }}|${{ matrix.platform }}\""
 
       - name: Collect artifacts
         if: always()

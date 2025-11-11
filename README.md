@@ -2,6 +2,8 @@
 
 NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理的工具，提供安装/编辑/移除、启动/停止/重启、I/O 重定向、环境变量与工作目录等能力。
 
+![NSSM 界面](doc/界面.png)
+
 ## 构建方式
 ### 1) GitHub Actions（推荐，手动触发）
 仓库已提供工作流：`.github/workflows/build.yml`。默认仅构建 64 位 Release，并收集产物到 GitHub Artifacts。

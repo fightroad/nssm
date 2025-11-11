@@ -523,7 +523,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_CREATEDIALOG_FAILED
 Severity = Informational
 Language = English
-CreateDialog() failed:
+CreateDialog() 失败：
 %s
 .
 
@@ -532,7 +532,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_MISSING_SERVICE_NAME
 Severity = Informational
 Language = English
-No valid service name was specified!
+未指定有效的服务名称！
 .
 
 
@@ -540,7 +540,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_MISSING_PATH
 Severity = Informational
 Language = English
-No valid executable path was specified!
+未指定有效的可执行文件路径！
 .
 
 
@@ -548,7 +548,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_OPTIONS
 Severity = Informational
 Language = English
-No valid arguments were specified!
+未指定有效的启动参数！
 .
 
 
@@ -556,7 +556,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_MISSING_USERNAME
 Severity = Informational
 Language = English
-Missing account name!
+缺少账户名！
 .
 
 
@@ -564,7 +564,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_USERNAME
 Severity = Informational
 Language = English
-Invalid account name!
+账户名无效！
 .
 
 
@@ -572,7 +572,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_MISSING_PASSWORD
 Severity = Informational
 Language = English
-Missing or mismatched password(s)!
+缺少密码或两次输入不一致！
 .
 
 
@@ -580,7 +580,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_PASSWORD
 Severity = Informational
 Language = English
-Invalid password!
+密码无效！
 .
 
 
@@ -588,7 +588,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_DISPLAYNAME
 Severity = Informational
 Language = English
-Invalid displayname!
+显示名称无效！
 .
 
 
@@ -596,7 +596,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_DESCRIPTION
 Severity = Informational
 Language = English
-Invalid description!
+描述无效！
 .
 
 
@@ -604,8 +604,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_OUT_OF_MEMORY_FOR_IMAGEPATH
 Severity = Informational
 Language = English
-Error constructing ImagePath!\nThis really shouldn't happen.  You could be out of memory
-or the world may be about to end or something equally bad.
+构造 ImagePath 出错！\n这本不该发生。可能是内存不足，\n或者遇到了同样糟糕的情况。
 .
 
 
@@ -613,7 +612,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_ENVIRONMENT
 Severity = Informational
 Language = English
-Environment should comprise strings of the form KEY=VALUE.
+环境变量应由形如 KEY=VALUE 的字符串组成。
 .
 
 
@@ -621,7 +620,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INVALID_DEPENDENCIES
 Severity = Informational
 Language = English
-Invalid dependencies!
+依赖项无效！
 .
 
 
@@ -629,8 +628,8 @@ MessageId = +1
 SymbolicName = NSSM_GUI_INSTALL_SERVICE_FAILED
 Severity = Informational
 Language = English
-Couldn't create service!
-Perhaps it is already installed...
+无法创建服务！
+可能已安装同名服务……
 .
 
 
@@ -638,8 +637,8 @@ MessageId = +1
 SymbolicName = NSSM_GUI_CREATE_PARAMETERS_FAILED
 Severity = Informational
 Language = English
-Couldn't set startup parameters for the service!
-Deleting the service...
+无法为该服务设置启动参数！
+正在删除服务……
 .
 
 
@@ -647,7 +646,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EDIT_PARAMETERS_FAILED
 Severity = Informational
 Language = English
-Couldn't set startup parameters for the service!
+无法为该服务设置启动参数！
 .
 
 
@@ -655,7 +654,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_ASK_REMOVE_SERVICE
 Severity = Informational
 Language = English
-Remove the service?
+是否移除该服务？
 .
 
 
@@ -663,8 +662,8 @@ MessageId = +1
 SymbolicName = NSSM_GUI_SERVICE_NOT_INSTALLED
 Severity = Informational
 Language = English
-Can't open service!
-Perhaps it isn't installed...
+无法打开服务！
+可能尚未安装……
 .
 
 
@@ -672,9 +671,9 @@ MessageId = +1
 SymbolicName = NSSM_GUI_REMOVE_SERVICE_FAILED
 Severity = Informational
 Language = English
-Can't delete service!  Make sure the service is stopped and try again.
-If this error persists, you may need to set the service NOT to start
-automatically, reboot your computer and try removing it again.
+无法删除服务！请确认服务已停止后重试。
+如果问题仍然存在，可能需要先将服务设置为“非自动启动”，
+重启计算机后再次尝试移除。
 .
 
 
@@ -682,7 +681,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_BROWSE_FILTER_APPLICATIONS
 Severity = Informational
 Language = English
-Applications%0
+应用程序%0
 .
 
 
@@ -690,7 +689,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_BROWSE_FILTER_DIRECTORIES
 Severity = Informational
 Language = English
-Directories%0
+目录%0
 .
 
 
@@ -698,7 +697,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_BROWSE_FILTER_ALL_FILES
 Severity = Informational
 Language = English
-All files%0
+所有文件%0
 .
 
 
@@ -706,7 +705,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_BROWSE_TITLE
 Severity = Informational
 Language = English
-Locate application file
+选择可执行文件
 .
 
 
@@ -786,7 +785,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_TAB_ROTATION
 Severity = Informational
 Language = English
-文件轮转%0
+日志轮转%0
 .
 
 
@@ -810,7 +809,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_STARTUP_AUTOMATIC
 Severity = Informational
 Language = English
-Automatic%0
+自动%0
 .
 
 
@@ -818,7 +817,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_STARTUP_DELAYED
 Severity = Informational
 Language = English
-Automatic (Delayed Start)%0
+自动（延迟启动）%0
 .
 
 
@@ -826,7 +825,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_STARTUP_MANUAL
 Severity = Informational
 Language = English
-Manual%0
+手动%0
 .
 
 
@@ -834,7 +833,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_STARTUP_DISABLED
 Severity = Informational
 Language = English
-Disabled%0
+禁用%0
 .
 
 
@@ -842,7 +841,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EXIT_RESTART
 Severity = Informational
 Language = English
-Restart application%0
+重启应用程序%0
 .
 
 
@@ -850,7 +849,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EXIT_IGNORE
 Severity = Informational
 Language = English
-No action (srvany compatible)%0
+不执行操作（兼容 srvany）%0
 .
 
 
@@ -858,7 +857,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EXIT_REALLY
 Severity = Informational
 Language = English
-Stop service (oneshot mode)%0
+停止服务（一次性模式）%0
 .
 
 
@@ -866,7 +865,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EXIT_UNCLEAN
 Severity = Informational
 Language = English
-Fake crash (pre-Vista)%0
+模拟崩溃（Vista 之前）%0
 .
 
 
@@ -874,7 +873,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_REALTIME_PRIORITY_CLASS
 Severity = Informational
 Language = English
-Realtime%0
+实时%0
 .
 
 
@@ -882,7 +881,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HIGH_PRIORITY_CLASS
 Severity = Informational
 Language = English
-High%0
+高%0
 .
 
 
@@ -890,7 +889,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_ABOVE_NORMAL_PRIORITY_CLASS
 Severity = Informational
 Language = English
-Above normal%0
+高于正常%0
 .
 
 
@@ -898,7 +897,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_NORMAL_PRIORITY_CLASS
 Severity = Informational
 Language = English
-Normal%0
+正常%0
 .
 
 
@@ -906,7 +905,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_BELOW_NORMAL_PRIORITY_CLASS
 Severity = Informational
 Language = English
-Below normal%0
+低于正常%0
 .
 
 
@@ -914,7 +913,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_IDLE_PRIORITY_CLASS
 Severity = Informational
 Language = English
-Low%0
+低%0
 .
 
 
@@ -922,9 +921,9 @@ MessageId = +1
 SymbolicName = NSSM_GUI_WARN_AFFINITY
 Severity = Informational
 Language = English
-The service is configured with a processor affinity range which
-specifies more CPUs than are present on this system.  Editing the
-service will result in additional CPUs being removed.
+该服务配置了处理器亲和性范围，
+所选 CPU 数量超过本机可用范围。
+保存后将移除超出的 CPU 选择。
 .
 
 
@@ -932,7 +931,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_WARN_AFFINITY_NONE
 Severity = Informational
 Language = English
-No CPUs selected!
+未选择任何 CPU！
 .
 
 
@@ -940,9 +939,8 @@ MessageId = +1
 SymbolicName = NSSM_GUI_WARN_STDIO
 Severity = Informational
 Language = English
-The service is configured with I/O redirection settings which cannot be
-represented by this GUI's simplified set of options.  Check the registry
-after editing the service to confirm its I/O redirection settings.
+该服务的 I/O 重定向设置无法被此 GUI 的简化选项完整表示。
+编辑后请在注册表中核对其 I/O 重定向设置。
 .
 
 
@@ -950,9 +948,9 @@ MessageId = +1
 SymbolicName = NSSM_GUI_WARN_ROTATE_BYTES
 Severity = Informational
 Language = English
-The service is configured with a 64-bit file size threshold for file
-rotation.  This GUI can only display 32-bit settings.  Check the registry
-after editing the service to confirm its file rotation settings.
+该服务配置了 64 位文件大小阈值用于日志轮转，
+而此 GUI 仅能显示 32 位设置。
+编辑后请在注册表中核对轮转设置。
 .
 
 
@@ -960,10 +958,9 @@ MessageId = +1
 SymbolicName = NSSM_GUI_WARN_ENVIRONMENT
 Severity = Informational
 Language = English
-The service is configured with a srvany-compatible environment block
-for the application as well as an extra environment block.  This GUI
-can only display one such block.  Editing the service will result in
-one of the environment blocks being deleted.
+该服务既配置了兼容 srvany 的环境块，
+又配置了额外的环境块；此 GUI 只能显示其中之一。
+编辑后将导致其中一个环境块被删除。
 .
 
 
@@ -979,7 +976,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_EVENT_START
 Severity = Informational
 Language = English
-Application start%0
+应用程序启动%0
 .
 
 
@@ -987,7 +984,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_EVENT_STOP
 Severity = Informational
 Language = English
-Service stop%0
+服务停止%0
 .
 
 
@@ -995,7 +992,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_EVENT_EXIT
 Severity = Informational
 Language = English
-Application exit%0
+应用程序退出%0
 .
 
 
@@ -1003,7 +1000,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_EVENT_POWER
 Severity = Informational
 Language = English
-Power event%0
+电源事件%0
 .
 
 
@@ -1011,7 +1008,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_EVENT_ROTATE
 Severity = Informational
 Language = English
-Log rotation%0
+日志轮转%0
 .
 
 
@@ -1019,7 +1016,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_START_PRE
 Severity = Informational
 Language = English
-Before starting application%0
+启动应用程序之前%0
 .
 
 
@@ -1027,7 +1024,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_START_POST
 Severity = Informational
 Language = English
-Successful application startup%0
+应用程序启动成功之后%0
 .
 
 
@@ -1035,7 +1032,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_STOP_PRE
 Severity = Informational
 Language = English
-Before shutting down application%0
+关闭应用程序之前%0
 .
 
 
@@ -1043,7 +1040,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_EXIT_POST
 Severity = Informational
 Language = English
-After application exits%0
+应用程序退出之后%0
 .
 
 
@@ -1051,7 +1048,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_POWER_CHANGE
 Severity = Informational
 Language = English
-Power setting change%0
+电源设置更改%0
 .
 
 
@@ -1059,7 +1056,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_POWER_RESUME
 Severity = Informational
 Language = English
-Resume from standby%0
+从待机恢复%0
 .
 
 
@@ -1067,7 +1064,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_ROTATE_PRE
 Severity = Informational
 Language = English
-Before online log rotation%0
+在线日志轮转之前%0
 .
 
 
@@ -1075,7 +1072,7 @@ MessageId = +1
 SymbolicName = NSSM_GUI_HOOK_ACTION_ROTATE_POST
 Severity = Informational
 Language = English
-After online log rotation%0
+在线日志轮转之后%0
 .
 
 

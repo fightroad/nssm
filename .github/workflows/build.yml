@@ -31,6 +31,10 @@ jobs:
           if (-not (Test-Path $devenv)) { throw "devenv not found at $devenv" }
           "devenv=$devenv" >> $env:GITHUB_OUTPUT
 
+      - name: Upgrade solution to current toolset
+        shell: cmd
+        run: "\"${{ steps.vs.outputs.devenv }}\" nssm.sln /Upgrade"
+
       - name: Build solution (MSBuild)
         shell: cmd
         run: msbuild.exe nssm.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m

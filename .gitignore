@@ -1,0 +1,60 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build directories
+Debug/
+Release/
+x64/
+ipch/
+
+# Compiled object files and binaries
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.lib
+*.exe
+*.dll
+*.tlb
+*.tli
+*.tlh
+*.ocx
+*.rsp
+*.pch
+*.pchi
+*.pdb
+
+# Intermediate and database files
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Logs and dumps
+*.log
+*.dmp
+
+# Resource compiler intermediates
+*.aps
+
+# Cache/temporary
+*.tlog
+*.lastbuildstate
+*.cache
+*.tmp
+*.temp
+
+# Coverage / analysis (optional)
+*.gcno
+*.gcda
+*.lcov
+
+# OS files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

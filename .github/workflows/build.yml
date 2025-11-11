@@ -1,0 +1,73 @@
+name: Build NSSM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [Win32, x64]
+        configuration: [Release]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Locate Visual Studio (devenv)
+        id: vs
+        shell: pwsh
+        run: |
+          $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath
+          if (-not $vsPath) { throw "Visual Studio not found" }
+          $devenv = Join-Path $vsPath "Common7\IDE\devenv.com"
+          if (-not (Test-Path $devenv)) { throw "devenv not found at $devenv" }
+          "devenv=$devenv" >> $env:GITHUB_OUTPUT
+
+      - name: Prepare version info
+        shell: cmd
+        run: version.cmd
+
+      - name: Upgrade solution to current toolset
+        shell: cmd
+        run: "\"${{ steps.vs.outputs.devenv }}\" nssm.sln /Upgrade"
+
+      - name: Build solution (MSBuild)
+        shell: cmd
+        run: msbuild.exe nssm.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m
+
+      - name: Collect artifacts
+        if: always()
+        shell: pwsh
+        run: |
+          $outDir = Join-Path (Resolve-Path .) "artifacts\${{ matrix.platform }}\${{ matrix.configuration }}"
+          New-Item -ItemType Directory -Force -Path $outDir | Out-Null
+          $patterns = @(
+            "Release\*.exe",
+            "Release\*.dll",
+            "Release\*.pdb",
+            "x64\Release\*.exe",
+            "x64\Release\*.dll",
+            "x64\Release\*.pdb",
+            "${{ matrix.platform }}\${{ matrix.configuration }}\*.exe",
+            "${{ matrix.platform }}\${{ matrix.configuration }}\*.dll",
+            "${{ matrix.platform }}\${{ matrix.configuration }}\*.pdb"
+          )
+          foreach ($p in $patterns) {
+            Get-ChildItem -Path $p -ErrorAction SilentlyContinue | Copy-Item -Destination $outDir -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nssm-${{ matrix.platform }}-${{ matrix.configuration }}
+          path: artifacts/${{ matrix.platform }}/${{ matrix.configuration }}
+
+

@@ -1,17 +1,6 @@
-# NSSM (Non-Sucking Service Manager) - Fork
+# NSSM (Non-Sucking Service Manager)
 
-本仓库是对原 NSSM 的 Fork，目标是在保持稳定性的前提下进行定制与增强，并提供更好的本地化与构建体验。
-
-## 功能与变化
-- 保留 NSSM 的核心能力：将任意可执行程序作为 Windows 服务运行与管理（安装/编辑/移除/启动/停止/重启、崩溃自动重启、I/O 重定向、环境变量与工作目录等）。
-- 本 Fork 的已完成改动：
-  - 仅构建 64 位版本（win64, Release）。
-  - 固定版本信息：`2.25.0`，移除 `version.cmd`，改用 `version.h` 常量。
-  - GitHub Actions 提供手动触发的构建工作流（`workflow_dispatch`）。
-  - 兼容 VS 现代工具链：工作流内先用 `devenv /Upgrade` 升级旧 `.vcproj`，再用 `msbuild` 构建。
-  - 资源与 GUI 本地化：保留英文与简体中文；移除法语、意大利语；`nssm.rc` 中中文资源置于英文后。
-  - `messages.mc`：仅英文语言块（内容含中文）。
-  - 新增 `.gitignore` 以忽略常见 VS/构建产物。
+NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理的工具，提供安装/编辑/移除、启动/停止/重启、I/O 重定向、环境变量与工作目录等能力。
 
 ## 构建方式
 ### 1) GitHub Actions（推荐，手动触发）
@@ -128,6 +117,80 @@
   - `nssm remove`
   - `nssm remove <ServiceName>`
   - 无确认：`nssm remove <ServiceName> confirm`
+
+## GUI 选项卡说明
+
+### 应用程序
+- 指定可执行文件路径、启动参数、工作目录。
+- 常见项：`Application`、`Arguments`、`AppDirectory`。
+
+### 服务
+- 设置显示名称、描述、启动类型（自动/延迟自动/手动/禁用）。
+- 常见项：`DisplayName`、`Description`、`Start`。
+
+### 详情
+- 查看/编辑服务的只读或派生信息（服务名、二进制路径等），便于核对。
+
+### 登录
+- 设置服务运行账户与密码，或使用 `LocalSystem`。
+- 常见项：`ObjectName`（用户名与可选密码）。
+
+### 依赖
+- 配置服务或服务组依赖顺序，确保依赖先启动。
+- 常见项：`DependOnService`、`DependOnGroup`（组名前需 `+`）。
+
+### 进程
+- 配置优先级、CPU 亲和性、控制台可用性等进程级选项。
+- 常见项：`AppPriority`、`AppAffinity`、`AppNoConsole`。
+
+### 关闭
+- 设置优雅关闭方法与各阶段超时（Console/Window/Threads）。
+- 常见项：`AppStopMethodSkip`、`AppStopMethodConsole/Window/Threads`（毫秒）。
+
+### 退出操作
+- 为默认或特定退出码配置操作：重启/忽略/退出（一次性模式）。
+- 常见项：`AppExit Default Restart|Ignore|Exit`，以及针对码值的映射。
+
+### I/O
+- 作用：将服务进程的标准输出(stdout)与标准错误(stderr)写入到文件，便于排查问题。
+- 常见项：`AppStdout`、`AppStderr`（两个路径完全相同即可合并 stdout 与 stderr）。
+- 注意：若程序直接写文件，文件句柄会被占用，影响“在线轮转”（见下）。
+- 示例：
+  - 合并输出：
+    - `nssm set MySvc AppStdout C:\logs\mysvc.log`
+    - `nssm set MySvc AppStderr C:\logs\mysvc.log`
+  - 分开输出：
+    - `nssm set MySvc AppStdout C:\logs\mysvc.out.log`
+    - `nssm set MySvc AppStderr C:\logs\mysvc.err.log`
+
+### 日志轮转
+- 作用：当日志过大或运行过久时切分归档，避免日志无限增长。
+- 模式：
+  - 离线轮转（默认）：仅在服务停止/重启时轮转（`AppRotate=1` 且 `AppRotateOnline=0`）。
+  - 在线轮转：服务运行中也能轮转（`AppRotate=1` 且 `AppRotateOnline=1`，通过管道写日志）。
+- 触发条件（可同时设定）：
+  - 按时间：`AppRotateSeconds <seconds>`（达到最小时间阈值后可轮转）。
+  - 按大小：`AppRotateBytes <bytes>` 和 `AppRotateBytesHigh <hi>`（支持 >4GB）。
+- 按需轮转（手动触发）：`nssm rotate <ServiceName>`（需已启用在线轮转才会立即生效）。
+- 常见项：`AppRotate`、`AppRotateOnline`、`AppRotateSeconds`、`AppRotateBytes`、`AppRotateBytesHigh`。
+- 示例：
+  - 离线轮转（每天、至少 10MB）：
+    - `nssm set MySvc AppRotate 1`
+    - `nssm set MySvc AppRotateOnline 0`
+    - `nssm set MySvc AppRotateSeconds 86400`
+    - `nssm set MySvc AppRotateBytes 10485760`
+  - 在线轮转（运行中到 100MB 切分）：
+    - `nssm set MySvc AppRotate 1`
+    - `nssm set MySvc AppRotateOnline 1`
+    - `nssm set MySvc AppRotateBytes 104857600`
+
+### 环境变量
+- 设置替换式环境或追加环境（与默认环境合并）。
+- 常见项：`AppEnvironment`（替换，REG_MULTI_SZ），`AppEnvironmentExtra`（追加）。
+
+### 事件钩子
+- 在 start/stop/exit/power/rotate 的 pre/post/change/resume 阶段执行脚本或程序。
+- 常见项：注册表下 per-event/action 的命令；GUI 提供逐项配置与测试。
 
 ## 模块概览（逐步补充）
 

@@ -11,51 +11,24 @@ NSSM：稳定可靠的服务管理器
 版本 %s %s，%s
 用法：nssm <选项> [<参数> ...]
 
-显示服务安装 GUI：
+常用命令：
+  安装（GUI）: nssm install [<服务名>]
+  安装（直接）: nssm install <服务名> <可执行程序> [<参数> ...]
+  编辑（GUI）: nssm edit <服务名>
 
-        nssm install [<服务名>]
+  导出/读取/设置/重置：
+    nssm dump <服务名>
+    nssm get <服务名> <参数> [<子参数>]
+    nssm set <服务名> <参数> [<子参数>] <值>
+    nssm reset <服务名> <参数> [<子参数>]
 
-无需确认直接安装服务：
+  移除（GUI）: nssm remove [<服务名>]
+  移除（直接）: nssm remove <服务名> confirm
 
-        nssm install <服务名> <可执行程序> [<参数> ...]
-
-显示服务编辑 GUI：
-
-        nssm edit <服务名>
-
-直接导出/读取/设置参数：
-
-        nssm dump <服务名>
-
-        nssm get <服务名> <参数> [<子参数>]
-
-        nssm set <服务名> <参数> [<子参数>] <值>
-
-        nssm reset <服务名> <参数> [<子参数>]
-
-显示服务移除 GUI：
-
-        nssm remove [<服务名>]
-
-无需确认直接移除服务：
-
-        nssm remove <服务名> confirm
-
-管理服务：
-
-        nssm start <服务名>
-
-        nssm stop <服务名>
-
-        nssm restart <服务名>
-
-        nssm status <服务名>
-
-        nssm statuscode <服务名>
-
-        nssm rotate <服务名>
-
-        nssm processes <服务名>
+  管理：
+    nssm start|stop|restart <服务名>
+    nssm status|statuscode <服务名>
+    nssm rotate|processes <服务名>
 .
 
 

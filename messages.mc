@@ -175,8 +175,8 @@ Service "%s" is not a valid %s service!
 Executable is %s
 .
 Language = Chinese
-服务“%s”不是一个有效的 %s 服务！
-Executable is %s
+服务"%s"不是一个有效的 %s 服务！
+可执行文件为 %s
 .
 
 MessageId = +1
@@ -390,7 +390,7 @@ Language = English
 Error getting parameter "%s" for service "%s"!
 .
 Language = Chinese
-获取服务“%s”的参数“%s”时出错！
+获取服务"%s"的参数"%s"失败！
 .
 
 MessageId = +1
@@ -400,7 +400,7 @@ Language = English
 Error setting parameter "%s" for service "%s"!
 .
 Language = Chinese
-为服务“%s”设置参数“%s”时出错！
+为服务"%s"设置参数"%s"失败！
 .
 
 MessageId = +1
@@ -783,7 +783,7 @@ Error constructing ImagePath!\nThis really shouldn't happen.  You could be out o
 or the world may be about to end or something equally bad.
 .
 Language = Chinese
-构造 ImagePath 出错！\n这本不该发生。可能是内存不足，\n或者遇到了同样糟糕的情况。
+构造 ImagePath 失败！\n这本不该发生。可能是内存不足，\n或遇到了其他严重问题。
 .
 
 MessageId = +1
@@ -1143,7 +1143,7 @@ Language = English
 Above normal%0
 .
 Language = Chinese
-高于标准%0
+高于正常%0
 .
 
 MessageId = +1
@@ -1185,9 +1185,9 @@ specifies more CPUs than are present on this system.  Editing the
 service will result in additional CPUs being removed.
 .
 Language = Chinese
-该服务配置了一个处理器关联范围，该范围
+该服务配置的处理器关联范围
 指定的CPU数量超过此系统上的CPU数量。编辑
-服务将导致删除其他额外的CPU。
+服务将导致移除多余的CPU。
 .
 
 MessageId = +1
@@ -1425,7 +1425,7 @@ Language = English
 Failed to get startup parameters for service %1.
 .
 Language = Chinese
-无法获取服务%1的启动参数。
+无法获取服务 %1 的启动参数。
 .
 
 MessageId = +1
@@ -1973,7 +1973,7 @@ DuplicateHandle() failed:
 %3
 .
 Language = Chinese
-将已为 %1 打开的文件句柄复制为 %2 时出错。
+将已为 %1 打开的文件句柄复制为 %2 失败。
 DuplicateHandle() 失败：
 %3
 .
@@ -1985,7 +1985,7 @@ Language = English
 Error setting up one or more I/O filehandles.  Service %1 will not be started.
 .
 Language = Chinese
-配置一个或多个 I/O 文件句柄时出错。服务 %1 将不会启动。
+配置一个或多个 I/O 文件句柄失败。服务 %1 将不会启动。
 .
 
 MessageId = +1
@@ -2022,7 +2022,7 @@ LoadLibrary() failed:
 %2
 .
 Language = Chinese
-加载 %1 DLL 时出错！
+加载 %1 DLL 失败！
 LoadLibrary() 失败：
 %2
 .

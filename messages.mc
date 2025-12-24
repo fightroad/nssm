@@ -59,7 +59,7 @@ To manage a service:
         nssm processes <servicename>
 .
 Language = Chinese
-NSSM: Windows 服务管理器
+NSSM：稳定可靠的服务管理器
 版本 %s %s, %s
 用法：nssm <选项> [<参数> ...]
 
@@ -90,7 +90,7 @@ Language = English
 Administrator access is needed to install a service.
 .
 Language = Chinese
-安装服务需要管理员访问权限.
+安装服务需要管理员权限。
 .
 
 MessageId = +1
@@ -100,7 +100,7 @@ Language = English
 Administrator access is needed to edit a service.
 .
 Language = Chinese
-编辑服务需要管理员访问权限。
+编辑服务需要管理员权限。
 .
 
 MessageId = +1
@@ -110,7 +110,7 @@ Language = English
 Administrator access is needed to remove a service.
 .
 Language = Chinese
-删除服务需要管理员访问权限。
+移除服务需要管理员权限。
 .
 
 MessageId = +1
@@ -120,7 +120,7 @@ Language = English
 To remove a service without confirmation: nssm remove <servicename> confirm
 .
 Language = Chinese
-删除一个服务无需确认: nssm remove <servicename> confirm
+无需确认直接移除：nssm remove <servicename> confirm
 .
 
 MessageId = +1
@@ -130,7 +130,7 @@ Language = English
 Out of memory for %s in %s!
 .
 Language = Chinese
-%s内存不足！（在%s中）
+在 %s 中为 %s 分配内存失败！
 .
 
 MessageId = +1
@@ -140,7 +140,7 @@ Language = English
 Error opening service manager!
 .
 Language = Chinese
-打开服务管理器时出错！
+打开服务管理器失败！
 .
 
 MessageId = +1
@@ -151,8 +151,8 @@ Error querying service "%s"!
 QueryServiceConfig(): %s
 .
 Language = Chinese
-查询 "%s" 服务时出错！
-QueryServiceConfig(): %s
+查询服务"%s"失败！
+QueryServiceConfig()：%s
 .
 
 MessageId = +1
@@ -163,8 +163,8 @@ Error querying service "%s"!
 QueryServiceConfig2(%s): %s
 .
 Language = Chinese
-查询 "%s" 服务时出错！
-QueryServiceConfig2(%s): %s
+查询服务"%s"失败！
+QueryServiceConfig2(%s)：%s
 .
 
 MessageId = +1
@@ -196,7 +196,7 @@ Language = English
 The full path to %s is too long!
 .
 Language = Chinese
- %s 的全路径太长！
+指向 %s 的完整路径过长！
 .
 
 MessageId = +1
@@ -206,7 +206,7 @@ Language = English
 The program flags are too long!
 .
 Language = Chinese
-程序标志太长！
+程序参数过长！
 .
 
 MessageId = +1
@@ -216,7 +216,7 @@ Language = English
 Out of memory for ImagePath!
 .
 Language = Chinese
- ImagePath 内存不足！
+为 ImagePath 分配内存失败！
 .
 
 MessageId = +1
@@ -227,8 +227,8 @@ Error creating service!
 CreateService(): %s
 .
 Language = Chinese
-创建服务时出错！
-CreateService(): %s
+创建服务失败！
+CreateService()：%s
 .
 
 MessageId = +1
@@ -238,7 +238,7 @@ Language = English
 The "Log on as a service" right was granted to account %s.
 .
 Language = Chinese
-已将“作为服务登录”权限授予帐户 %s 。
+已为账户 %s 授予"作为服务登录"的权限。
 .
 
 MessageId = +1
@@ -248,7 +248,7 @@ Language = English
 Failed to grant the "Log on as a service" right to account %s!
 .
 Language = Chinese
-无法将“作为服务登录”权限授予帐户 %s ！
+为账户 %s 授予"作为服务登录"权限失败！
 .
 
 MessageId = +1
@@ -258,7 +258,7 @@ Language = English
 LsaOpenPolicy(): %s
 .
 Language = Chinese
-LsaOpenPolicy(): %s
+LsaOpenPolicy()：%s
 .
 
 MessageId = +1
@@ -269,8 +269,8 @@ Failed to look up the SID for username %s!
 LsaLookupNames(): %s
 .
 Language = Chinese
-无法查找用户名 %s 的SID！
-LsaLookupNames(): %s
+查询用户名 %s 的 SID 失败！
+LsaLookupNames()：%s
 .
 
 MessageId = +1
@@ -281,8 +281,8 @@ Failed to initialise the SID for username %s!
 InitializeSid(): %s
 .
 Language = Chinese
-未能初始化用户名 %s 的SID！
-InitializeSid(): %s
+初始化用户名 %s 的 SID 失败！
+InitializeSid()：%s
 .
 
 MessageId = +1
@@ -293,8 +293,8 @@ Failed to check if %s has the "Log on as a service" right!
 LsaEnumerateAccountRights(): %s
 .
 Language = Chinese
-无法检查 %s 是否具有“作为服务登录”权限！
-LsaEnumerateAccountRights(): %s
+检查 %s 是否具有"作为服务登录"权限失败！
+LsaEnumerateAccountRights()：%s
 .
 
 MessageId = +1
@@ -304,7 +304,7 @@ Language = English
 LsaAddAccountRights(): %s
 .
 Language = Chinese
-LsaAddAccountRights(): %s
+LsaAddAccountRights()：%s
 .
 
 MessageId = +1
@@ -315,8 +315,8 @@ Error editing service!
 ChangeServiceConfig(): %s
 .
 Language = Chinese
-错误编辑服务！
-ChangeServiceConfig(): %s
+编辑服务失败！
+ChangeServiceConfig()：%s
 .
 
 MessageId = +1
@@ -327,8 +327,8 @@ Failed to write registry value %s:
 RegSetValueEx(): %s
 .
 Language = Chinese
-无法写入注册表值 %s ：
-RegSetValueEx(): %s
+写入注册表值 %s 失败：
+RegSetValueEx()：%s
 .
 
 MessageId = +1
@@ -339,8 +339,8 @@ Error deleting registry value %s for service "%s"!
 RegDeleteValue(): %s
 .
 Language = Chinese
-删除注册表值 %s 时出错（在服务“%s”中）！
-RegDeleteValue(): %s
+删除服务"%s"的注册表值 %s 失败！
+RegDeleteValue()：%s
 .
 
 MessageId = +1
@@ -350,7 +350,7 @@ Language = English
 Invalid parameter "%s".  Valid parameters are:
 .
 Language = Chinese
-无效参数“%s”。有效参数包括：
+无效参数"%s"。可用参数为：
 .
 
 MessageId = +1
@@ -430,7 +430,7 @@ Language = English
 Invalid exit action "%s".  Valid exit actions are:
 .
 Language = Chinese
-退出操作“%s”无效。有效的退出操作包括：
+无效的退出动作"%s"。可用退出动作为：
 .
 
 MessageId = +1
@@ -440,7 +440,7 @@ Language = English
 Invalid service type "%s".  Valid types are:
 .
 Language = Chinese
-无效的服务类型“%s”。有效类型包括：
+无效的服务类型"%s"。可用类型为：
 .
 
 MessageId = +1
@@ -451,8 +451,8 @@ Error configuring delayed startup for service "%s".  The service will start auto
 ChangeServiceConfig2(): %s
 .
 Language = Chinese
-配置服务“%s”的延迟启动时出错。服务将自动启动。
-ChangeServiceConfig2(): %s
+为服务"%s"配置延迟自动启动失败；该服务将以自动启动方式运行。
+ChangeServiceConfig2()：%s
 .
 
 MessageId = +1
@@ -462,7 +462,7 @@ Language = English
 Invalid startup type "%s".  Valid types are:
 .
 Language = Chinese
-无效的启动类型“%s”。有效类型包括：
+无效的启动类型"%s"。可用类型为：
 .
 
 MessageId = +1
@@ -472,7 +472,7 @@ Language = English
 Invalid process priority "%s".  Valid priorities are:
 .
 Language = Chinese
-无效的进程优先级“%s”。有效的优先级是：
+无效的进程优先级"%s"。可用优先级为：
 .
 
 MessageId = +1
@@ -493,8 +493,8 @@ Service type "%s" is invalid for service "%s".
 Only services running under the %s account may be interactive.
 .
 Language = Chinese
-服务类型“%s”对于服务“%s”无效。
-只有在%s帐户下运行的服务才可以交互。
+服务类型"%s"不适用于服务"%s"。
+只有以 %s 账户运行的服务才可为交互式。
 .
 
 MessageId = +1
@@ -504,7 +504,7 @@ Language = English
 Error setting startup parameters for the service!
 .
 Language = Chinese
-设置服务的启动参数时出错！
+为服务设置启动参数失败！
 .
 
 MessageId = +1
@@ -526,7 +526,7 @@ OpenService(): %s
 .
 Language = Chinese
 无法打开服务！
-OpenService(): %s
+OpenService()：%s
 .
 
 MessageId = +1
@@ -538,7 +538,7 @@ EnumServicesStatus(): %s
 .
 Language = Chinese
 无法打开服务！
-EnumServicesStatus(): %s
+EnumServicesStatus()：%s
 .
 
 MessageId = +1
@@ -548,7 +548,7 @@ Language = English
 Error deleting service!
 .
 Language = Chinese
-删除服务时出错！
+删除服务失败！
 .
 
 MessageId = +1
@@ -558,7 +558,7 @@ Language = English
 Service "%s" removed successfully!
 .
 Language = Chinese
-服务“%s”已成功删除！
+服务"%s"移除成功！
 .
 
 MessageId = +1
@@ -568,7 +568,7 @@ Language = English
 Service "%s" edited successfully!
 .
 Language = Chinese
-已成功编辑服务“%s”！
+服务"%s"编辑成功！
 .
 
 MessageId = +1
@@ -578,7 +578,7 @@ Language = English
 Services cannot be renamed!
 .
 Language = Chinese
-无法重命名服务！
+服务不支持重命名！
 .
 
 MessageId = +1
@@ -591,10 +591,10 @@ The requested affinity will be written to the registry as-is.
 Note, however, that the effective affinity will be %s.
 .
 Language = Chinese
-请求的处理器关联范围%s不合适。
-此系统上的最大关联范围为%s。
-请求的关联将按原样写入注册表。
-但是请注意，有效关联将是%s。
+请求的处理器亲和性范围 %s 不合适。
+本机最大可用范围为 %s。
+请求的亲和性将原样写入注册表，
+但实际生效的范围将是 %s。
 .
 
 MessageId = +1
@@ -606,9 +606,9 @@ Valid specifications are of the form "0-2,4-6,10,15"
 Identifiers must be in the range 0-%d on this system.
 .
 Language = Chinese
-关联规范“%s”无效。
-有效规范的格式为“0-2,4-6,10,15”
-此系统上的标识符必须在0-%d范围内。
+亲和性规格"%s"无效。
+有效格式示例："0-2,4-6,10,15"
+在本机上可用的编号范围为 0-%d。
 .
 
 MessageId = +1
@@ -618,7 +618,7 @@ Language = English
 %s: Unexpected status %s in response to %s control.
 .
 Language = Chinese
-%s:响应%s控件时出现意外状态%s。
+%s：收到对 %s 控制的异常状态 %s。
 .
 
 MessageId = +1
@@ -629,8 +629,8 @@ Failed to look up the username for SID.
 LsaLookupSids(): %s
 .
 Language = Chinese
-无法查找SID的用户名。
-LsaLookupSids(): %s
+查询 SID 的用户名失败。
+LsaLookupSids()：%s
 .
 
 MessageId = +1
@@ -640,7 +640,7 @@ Language = English
 Failed to create %s SID!
 .
 Language = Chinese
-无法创建%s SID！
+创建 %s SID 失败！
 .
 
 MessageId = +1
@@ -650,7 +650,7 @@ Language = English
 Invalid hook event.  Valid hook events are:
 .
 Language = Chinese
-无效的挂钩事件。有效的钩子事件包括：
+无效的钩子事件。可用事件有：
 .
 
 MessageId = +1
@@ -660,7 +660,7 @@ Language = English
 Invalid hook action for event %s.  Valid hook actions are:
 .
 Language = Chinese
-事件%s的钩子操作无效。有效的钩子操作包括：
+事件 %s 的钩子动作无效。可用动作有：
 .
 
 MessageId = +1
@@ -670,7 +670,7 @@ Language = English
 Invalid hook name.  Names should be specified in the form <event>/<action>.
 .
 Language = Chinese
-无效的挂钩名称。名称应以<event>/<action>的形式指定。
+无效的钩子名称。名称格式应为 <事件>/<动作>。
 .
 
 MessageId = +1
@@ -702,7 +702,7 @@ Language = English
 No valid executable path was specified!
 .
 Language = Chinese
-未指定有效的可执行路径！
+未指定有效的可执行文件路径！
 .
 
 MessageId = +1
@@ -712,7 +712,7 @@ Language = English
 No valid arguments were specified!
 .
 Language = Chinese
-没有指定有效的参数！
+未指定有效的启动参数！
 .
 
 MessageId = +1
@@ -722,7 +722,7 @@ Language = English
 Missing account name!
 .
 Language = Chinese
-缺少帐户名！
+缺少账户名！
 .
 
 MessageId = +1
@@ -732,7 +732,7 @@ Language = English
 Invalid account name!
 .
 Language = Chinese
-无效的帐户名！
+账户名无效！
 .
 
 MessageId = +1
@@ -742,7 +742,7 @@ Language = English
 Missing or mismatched password(s)!
 .
 Language = Chinese
-密码丢失或不匹配！
+缺少密码或两次输入不一致！
 .
 
 MessageId = +1
@@ -783,8 +783,7 @@ Error constructing ImagePath!\nThis really shouldn't happen.  You could be out o
 or the world may be about to end or something equally bad.
 .
 Language = Chinese
-构造ImagePath时出错\n这真的不应该发生。你可能没有内存了
-或者世界即将结束，或者同样糟糕的事情。
+构造 ImagePath 出错！\n这本不该发生。可能是内存不足，\n或者遇到了同样糟糕的情况。
 .
 
 MessageId = +1
@@ -794,7 +793,7 @@ Language = English
 Environment should comprise strings of the form KEY=VALUE.
 .
 Language = Chinese
-环境应该包含形式为KEY=VALUE的字符串。
+环境变量应由形如 KEY=VALUE 的字符串组成。
 .
 
 MessageId = +1
@@ -804,7 +803,7 @@ Language = English
 Invalid dependencies!
 .
 Language = Chinese
-无效的依赖项！
+依赖项无效！
 .
 
 MessageId = +1
@@ -816,7 +815,7 @@ Perhaps it is already installed...
 .
 Language = Chinese
 无法创建服务！
-也许它已经安装好了。。。
+可能已安装同名服务……
 .
 
 MessageId = +1
@@ -827,8 +826,8 @@ Couldn't set startup parameters for the service!
 Deleting the service...
 .
 Language = Chinese
-无法设置服务的启动参数！
-正在删除服务。。。
+无法为该服务设置启动参数！
+正在删除服务……
 .
 
 MessageId = +1
@@ -838,7 +837,7 @@ Language = English
 Couldn't set startup parameters for the service!
 .
 Language = Chinese
-无法设置服务的启动参数！
+无法为该服务设置启动参数！
 .
 
 MessageId = +1
@@ -848,7 +847,7 @@ Language = English
 Remove the service?
 .
 Language = Chinese
-删除服务？
+是否移除该服务？
 .
 
 MessageId = +1
@@ -860,7 +859,7 @@ Perhaps it isn't installed...
 .
 Language = Chinese
 无法打开服务！
-也许它没有安装。。。
+可能尚未安装……
 .
 
 MessageId = +1
@@ -872,9 +871,9 @@ If this error persists, you may need to set the service NOT to start
 automatically, reboot your computer and try removing it again.
 .
 Language = Chinese
-无法删除服务！请确保服务已停止，然后重试。
-如果此错误仍然存在，您可能需要将服务设置为不启动
-自动重新启动计算机，然后再次尝试将其删除。
+无法删除服务！请确认服务已停止后重试。
+如果问题仍然存在，可能需要先将服务设置为"非自动启动"，
+重启计算机后再次尝试移除。
 .
 
 MessageId = +1
@@ -914,7 +913,7 @@ Language = English
 Locate application file
 .
 Language = Chinese
-定位应用程序文件
+选择可执行文件
 .
 
 MessageId = +1
@@ -924,7 +923,7 @@ Language = English
 Application%0
 .
 Language = Chinese
-应用%0
+应用程序%0
 .
 
 MessageId = +1
@@ -944,7 +943,7 @@ Language = English
 Details%0
 .
 Language = Chinese
-细节%0
+详情%0
 .
 
 MessageId = +1
@@ -964,7 +963,7 @@ Language = English
 Dependencies%0
 .
 Language = Chinese
-依赖关系%0
+依赖%0
 .
 
 MessageId = +1
@@ -994,7 +993,7 @@ Language = English
 Exit actions%0
 .
 Language = Chinese
-退出动作%0
+退出操作%0
 .
 
 MessageId = +1
@@ -1014,7 +1013,7 @@ Language = English
 File rotation%0
 .
 Language = Chinese
-文件rotation%0
+日志轮转%0
 .
 
 MessageId = +1
@@ -1024,7 +1023,7 @@ Language = English
 Environment%0
 .
 Language = Chinese
-环境%0
+环境变量%0
 .
 
 MessageId = +1
@@ -1034,7 +1033,7 @@ Language = English
 Hooks%0
 .
 Language = Chinese
-钩子%0
+事件钩子%0
 .
 
 MessageId = +1
@@ -1393,7 +1392,6 @@ StartServiceCtrlDispatcher() failed:
 %1
 .
 Language = Chinese
-尝试将服务主任务连接到Windows服务管理器时出错。
 StartServiceCtrlDispatcher() 失败：
 %1
 .
@@ -1407,7 +1405,7 @@ Perhaps you need to be an administrator...
 .
 Language = Chinese
 无法连接到服务管理器！
-也许你需要成为一名管理员。。。
+可能需要管理员权限……
 .
 
 MessageId = +1
@@ -1417,7 +1415,7 @@ Language = English
 Out of memory for %1 in %2!
 .
 Language = Chinese
-%2中%1的内存不足！
+在 %2 中为 %1 分配内存失败！
 .
 
 MessageId = +1
@@ -1438,7 +1436,6 @@ RegisterServiceCtrlHandlerEx() failed:
 %1
 .
 Language = Chinese
-注册服务控制扩展查询管理功能失败。
 RegisterServiceCtrlHandlerEx() 失败：
 %1
 .
@@ -1451,8 +1448,8 @@ Can't start %1 for service %2.
 Error code: %3.
 .
 Language = Chinese
-无法为服务%2启动%1。
-错误代码：%3。
+无法为服务 %2 启动 %1。
+错误码：%3。
 .
 
 MessageId = +1
@@ -1463,8 +1460,8 @@ Failed to restart %1 for service %2.
 Sleeping...
 .
 Language = Chinese
-无法为服务%2重新启动%1。
-睡觉。。。
+为服务 %2 重启 %1 失败。
+等待中……
 .
 
 MessageId = +1
@@ -1474,7 +1471,7 @@ Language = English
 Started %1 %2 for service %3 in %4.
 .
 Language = Chinese
-已为%4中的服务%3启动%1 %2。
+已为服务 %3 启动 %1 %2，用时 %4。
 .
 
 MessageId = +1
@@ -1486,7 +1483,7 @@ RegisterWaitForSingleObject() failed:
 %3
 .
 Language = Chinese
-%2退出时，服务%1可能声称仍在运行。
+当 %2 退出时，服务 %1 可能仍声称在运行。
 RegisterWaitForSingleObject() 失败：
 %3
 .
@@ -1500,7 +1497,7 @@ CreateProcess() failed:
 %3
 .
 Language = Chinese
-无法启动服务%1。无法启动程序%2。
+启动服务 %1 失败。无法启动程序 %2。
 CreateProcess() 失败：
 %3
 .
@@ -1512,7 +1509,7 @@ Language = English
 Killing process %2 because service %1 is stopping.
 .
 Language = Chinese
-正在终止进程%2，因为服务%1正在停止。
+由于服务 %1 正在停止，正在终止进程 %2。
 .
 
 MessageId = +1
@@ -1522,7 +1519,7 @@ Language = English
 Requested stop of service %1.  No action is required as program %2 is not running.
 .
 Language = Chinese
-请求停止服务%1。由于程序%2未运行，无需执行任何操作。
+已请求停止服务 %1。由于程序 %2 未在运行，无需执行操作。
 .
 
 MessageId = +1
@@ -1532,7 +1529,7 @@ Language = English
 Program %1 for service %2 exited with return code %3.
 .
 Language = Chinese
-服务%2的程序%1已退出，返回代码为%3。
+服务 %2 的程序 %1 已退出，返回码 %3。
 .
 
 MessageId = +1
@@ -1543,8 +1540,8 @@ Service %1 action for exit code %2 is %3.
 Attempting to restart %4.
 .
 Language = Chinese
-退出代码%2的服务%1操作为%3。
-正在尝试重新启动%4。
+服务 %1 的退出码 %2 对应动作为 %3。
+正在尝试重启 %4。
 .
 
 MessageId = +1
@@ -1555,8 +1552,8 @@ Service %1 action for exit code %2 is %3.
 No action will be taken to restart %4.
 .
 Language = Chinese
-退出代码%2的服务%1操作为%3。
-不会采取任何操作来重新启动%4。
+服务 %1 的退出码 %2 对应动作为 %3。
+不会对 %4 执行重启操作。
 .
 
 MessageId = +1
@@ -1579,7 +1576,7 @@ Failed to open registry key HKLM\%1:
 %2
 .
 Language = Chinese
-无法打开注册表项HKLM\%1:
+打开注册表键 HKLM\%1 失败：
 %2
 .
 
@@ -1591,7 +1588,7 @@ Failed to read registry value %1:
 %2
 .
 Language = Chinese
-读取注册表值%1失败：
+读取注册表值 %1 失败：
 %2
 .
 
@@ -1603,7 +1600,7 @@ Failed to write registry value %1:
 %2
 .
 Language = Chinese
-无法写入注册表值%1：
+写入注册表值 %1 失败：
 %2
 .
 
@@ -1628,9 +1625,9 @@ Honouring the %4 action would result in the service being flagged as failed and 
 The service will instead be stopped gracefully.  To suppress this message, explicitly configure the exit action for exit code 0 to either %5 or %6.
 .
 Language = Chinese
-服务%1应用程序%2已退出，退出代码为0，但默认退出操作为%3。
-执行%4操作将导致服务被标记为失败，并将执行恢复操作。
-服务将被正常停止。若要禁止显示此消息，请将退出代码0的退出操作显式配置为%5或%6。
+服务 %1 的应用 %2 以退出码 0 退出，但默认退出动作为 %3。
+若执行 %4 动作，将导致服务被标记为失败并触发恢复策略。
+因此将改为优雅停止该服务。要抑制此消息，请将退出码 0 的退出动作显式配置为 %5 或 %6。
 .
 
 MessageId = +1
@@ -1641,7 +1638,7 @@ Failed to expand registry value %1:
 %2
 .
 Language = Chinese
-无法展开注册表值%1：
+展开注册表值 %1 失败：
 %2
 .
 
@@ -1652,7 +1649,7 @@ Language = English
 Killing process tree of process %2 for service %1 with exit code %3
 .
 Language = Chinese
-正在终止退出代码为%3的服务%1的进程%2的进程树
+正在终止服务 %1 的进程树（根 PID %2），退出码 %3
 .
 
 MessageId = +1
@@ -1663,7 +1660,7 @@ Failed to create snapshot of running processes when terminating service %1:
 %2
 .
 Language = Chinese
-终止服务%1时无法创建正在运行的进程的快照：
+终止服务 %1 时创建进程快照失败：
 %2
 .
 
@@ -1675,7 +1672,7 @@ Failed to enumerate running processes when terminating service %1:
 %2
 .
 Language = Chinese
-终止服务%1时无法枚举正在运行的进程：
+终止服务 %1 时枚举进程失败：
 %2
 .
 
@@ -1687,7 +1684,7 @@ Failed to open process handle for process with PID %1 when terminating service %
 %3
 .
 Language = Chinese
-终止服务%2时，无法打开PID为%1的进程的进程句柄：
+终止服务 %2 时，打开 PID %1 的进程句柄失败：
 %3
 .
 
@@ -1698,7 +1695,7 @@ Language = English
 Killing PID %1 in process tree of PID %2 because service %3 is stopping.
 .
 Language = Chinese
-正在终止PID%2的进程树中的PID%1，因为服务%3正在停止。
+由于服务 %3 正在停止，正在终止进程树 PID %2 下的 PID %1。
 .
 
 MessageId = +1
@@ -1709,7 +1706,7 @@ Failed to terminate process with PID %1 for service %2:
 %3
 .
 Language = Chinese
-无法终止服务%2的PID为%1的进程：
+终止服务 %2 的 PID %1 失败：
 %3
 .
 
@@ -1721,8 +1718,8 @@ Registry key %1 is unset for service %2.
 No flags will be passed to %3 when it starts.
 .
 Language = Chinese
-服务%2的注册表项%1未设置。
-%3启动时不会向其传递任何标志。
+服务 %2 的注册表键 %1 未设置。
+启动 %3 时将不传递任何参数。
 .
 
 MessageId = +1
@@ -1733,8 +1730,8 @@ Registry key %1 is unset for service %2.
 Assuming startup directory %3.
 .
 Language = Chinese
-服务%2的注册表项%1未设置。
-假定启动目录为%3。
+服务 %2 的注册表键 %1 未设置。
+假定启动目录为 %3。
 .
 
 MessageId = +1
@@ -1745,8 +1742,8 @@ Registry key %1 is unset for service %2.
 Additionally, ExpandEnvironmentStrings("%%SYSTEMROOT%%") failed when trying to choose a fallback startup directory.
 .
 Language = Chinese
-服务%2的注册表项%1未设置。
-此外，ExpandEnvironmentStrings（“%%SYSTEMROOT%%”）在尝试选择回退启动目录时失败。
+服务 %2 的注册表键 %1 未设置。
+此外，尝试选择回退启动目录时 ExpandEnvironmentStrings("%%SYSTEMROOT%%") 失败。
 .
 
 MessageId = +1
@@ -1757,7 +1754,7 @@ Failed to create snapshot of running threads when terminating service %1:
 %2
 .
 Language = Chinese
-终止服务%1时无法创建运行线程的快照：
+终止服务 %1 时创建线程快照失败：
 %2
 .
 
@@ -1769,7 +1766,7 @@ Failed to enumerate running threads when terminating service %1:
 %2
 .
 Language = Chinese
-终止服务%1时无法枚举正在运行的线程：
+终止服务 %1 时枚举线程失败：
 %2
 .
 
@@ -1781,8 +1778,8 @@ Service %1 ran for less than %2 milliseconds.
 Restart will be delayed by %3 milliseconds.
 .
 Language = Chinese
-服务%1运行的时间少于%2毫秒。
-重新启动将延迟%3毫秒。
+服务 %1 运行时间少于 %2 毫秒。
+重启将延迟 %3 毫秒。
 .
 
 MessageId = +1
@@ -1792,7 +1789,7 @@ Language = English
 Request to resume service %1.  Throttling of restart attempts will be reset.
 .
 Language = Chinese
-请求恢复服务%1。重新启动尝试的限制将被重置。
+收到恢复服务 %1 的请求。将重置重启节流。
 .
 
 MessageId = +1
@@ -1802,7 +1799,7 @@ Language = English
 The registry value %2, used to specify the minimum number of milliseconds which must elapse before service %1 is considered to have started successfully, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
 .
 Language = Chinese
-用于指定服务%1被认为已成功启动之前必须经过的最小毫秒数的注册表值%2不是REG_DWORD类型。将使用默认时间%3毫秒。
+注册表值 %2（指定服务 %1 被认为成功启动所需的最少毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 MessageId = +1
@@ -1814,9 +1811,9 @@ Failed to create waitable timer for service %1:
 Throttled restarts will not be interruptible.
 .
 Language = Chinese
-无法为服务%1创建可等待计时器：
+为服务 %1 创建可等待定时器失败：
 %2
-Les redémarrages régulés ne pourront pas être interrompus.
+节流重启将无法被中断。
 .
 
 MessageId = +1
@@ -1827,8 +1824,9 @@ Failed to start service %1.  Program %2 couldn't be launched.
 CreateProcess() failed with ERROR_INVALID_PARAMETER and a process environment was set in the %3 registry value.  It is likely that the environment was incorrectly specified.  %3 should be a REG_MULTI_SZ value comprising strings of the form KEY=VALUE.
 .
 Language = Chinese
-无法启动服务%1。无法启动程序%2。
-CreateProcess（）失败，错误为ERROR_INVALID_PARAMETER，并且在%3注册表值中设置了进程环境。很可能环境的指定不正确。%3应该是一个REG_MULTI_SZ值，由KEY=value形式的字符串组成。
+启动服务 %1 失败。无法启动程序 %2。
+CreateProcess() 因 ERROR_INVALID_PARAMETER 失败，且注册表值 %3 设置了进程环境。
+很可能是环境格式不正确。%3 必须为 REG_MULTI_SZ，包含若干形如 KEY=VALUE 的字符串。
 .
 
 MessageId = +1
@@ -1838,7 +1836,7 @@ Language = English
 Environment declaration %1 for service %2 is not of type REG_MULTI_SZ and will be ignored.
 .
 Language = Chinese
-服务%2的环境声明%1不是REG_MULTI_SZ类型，将被忽略。
+服务 %2 的环境声明 %1 不是 REG_MULTI_SZ 类型，将被忽略。
 .
 
 MessageId = +1
@@ -1848,7 +1846,7 @@ Language = English
 Service %1 received %2 control, which will be handled.
 .
 Language = Chinese
-服务%1接收到%2控制，将对此进行处理。
+服务 %1 收到控制码 %2，将予以处理。
 .
 
 MessageId = +1
@@ -1858,7 +1856,7 @@ Language = English
 Service %1 received unsupported %2 control, which will not be handled.
 .
 Language = Chinese
-服务%1接收到不受支持的%2控件，将不处理该控件。
+服务 %1 收到不支持的控制码 %2，将不会处理。
 .
 
 MessageId = +1
@@ -1868,7 +1866,7 @@ Language = English
 Service %1 received unknown service control message %2, which will be ignored.
 .
 Language = Chinese
-服务%1收到未知的服务控制消息%2，该消息将被忽略。
+服务 %1 收到未知服务控制消息 %2，将被忽略。
 .
 
 MessageId = +1
@@ -1880,8 +1878,10 @@ ChangeServiceConfig2() failed:
 %2
 .
 Language = Chinese
-为服务%1配置服务失败操作时出错。如果服务以非零退出代码正常退出，则不会执行恢复操作。
+为服务 %1 配置失败动作出错。
+如果服务以非零退出码"正常"退出，将不再触发恢复策略。
 ChangeServiceConfig2() 失败：
+%2
 .
 
 MessageId = +1
@@ -1892,7 +1892,7 @@ GetProcessTimes() failed:
 %1
 .
 Language = Chinese
-GetProcessTimes() 失败:
+GetProcessTimes() 失败：
 %1
 .
 
@@ -1905,7 +1905,7 @@ AttachConsole() failed:
 %2
 .
 Language = Chinese
-附加到服务%1的控制台时出错。
+为服务 %1 附加控制台失败。
 AttachConsole() 失败：
 %2
 .
@@ -1919,8 +1919,8 @@ SetConsoleCtrlHandler() failed:
 %2
 .
 Language = Chinese
-为发送到服务%1的Control-C事件设置空处理程序时出错。
-SetConsoletrlHandler() 失败：
+为服务 %1 设置 Control-C 事件空处理程序失败。
+SetConsoleCtrlHandler() 失败：
 %2
 .
 
@@ -1933,8 +1933,8 @@ GenerateConsoleCtrlEvent() failed:
 %2
 .
 Language = Chinese
-为服务%1生成Control-C事件时出错。
-GenerateConsolectLevent() 失败：
+为服务 %1 生成 Control-C 事件失败。
+GenerateConsoleCtrlEvent() 失败：
 %2
 .
 
@@ -1947,7 +1947,7 @@ FreeConsole() failed:
 %2
 .
 Language = Chinese
-从服务%1的控制台分离时出错。
+为服务 %1 释放控制台失败。
 FreeConsole() 失败：
 %2
 .
@@ -1960,7 +1960,7 @@ CreateFile() failed to open %1:
 %2
 .
 Language = Chinese
-CreateFile() 无法打开 %1:
+CreateFile() 打开 %1 失败：
 %2
 .
 
@@ -1973,7 +1973,7 @@ DuplicateHandle() failed:
 %3
 .
 Language = Chinese
-将以前为%1打开的文件句柄复制为%2时出错。
+将已为 %1 打开的文件句柄复制为 %2 时出错。
 DuplicateHandle() 失败：
 %3
 .
@@ -1985,7 +1985,7 @@ Language = English
 Error setting up one or more I/O filehandles.  Service %1 will not be started.
 .
 Language = Chinese
-设置一个或多个I/O文件句柄时出错。服务%1将不会启动。
+配置一个或多个 I/O 文件句柄时出错。服务 %1 将不会启动。
 .
 
 MessageId = +1
@@ -1995,7 +1995,7 @@ Language = English
 The registry value %2, used to specify the method(s) by which %3 will skip when attempting to stop service %1, was not of type REG_DWORD.  All available methods will be used.
 .
 Language = Chinese
-注册表值%2（用于指定%3在尝试停止服务%1时跳过的方法）不是REG_DWORD类型。将使用所有可用的方法。
+注册表值 %2（指定在尝试停止服务 %1 时 %3 将跳过的方法）不是 REG_DWORD 类型。将使用所有可用方法。
 .
 
 MessageId = +1
@@ -2007,9 +2007,10 @@ Usually %3 will call TerminateProcess() as a last resort to ensure that the proc
 It will no longer be possible to attempt to control the application and the service will report a stopped status.
 .
 Language = Chinese
-服务%1正在停止，但PID%2仍在运行。
-通常%3将调用TerminateProcess()作为最后手段，以确保进程已停止，但已设置注册表值%4，并且未尝试所有进程终止方法。
-无法再尝试控制应用程序，服务将报告停止状态。
+服务 %1 正在停止，但 PID %2 仍在运行。
+通常 %3 会在最后手段调用 TerminateProcess() 以确保进程被终止，
+但由于已设置注册表值 %4，未尝试所有终止方法。
+将无法继续尝试控制该应用，服务将报告已停止状态。
 .
 
 MessageId = +1
@@ -2021,7 +2022,7 @@ LoadLibrary() failed:
 %2
 .
 Language = Chinese
-加载%1 DLL时出错！
+加载 %1 DLL 时出错！
 LoadLibrary() 失败：
 %2
 .
@@ -2034,7 +2035,7 @@ GetProcAddress(%1) failed:
 %2
 .
 Language = Chinese
-GetProcAddress(%1) 失败:
+GetProcAddress(%1) 失败：
 %2
 .
 
@@ -2045,7 +2046,7 @@ Language = English
 The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after sending a Control-C event, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
 .
 Language = Chinese
-用于指定在发送Control-C事件后等待服务%1停止的最大毫秒数的注册表值%2不是REG_DWORD类型。将使用默认时间%3毫秒。
+注册表值 %2（指定向服务 %1 发送 Control-C 后等待其停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 MessageId = +1
@@ -2055,7 +2056,7 @@ Language = English
 The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a WM_CLOSE message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
 .
 Language = Chinese
-注册表值%2不是REG_DWORD类型，它用于指定在向应用程序管理的windows发布WM_CLOSE消息后等待服务%1停止的最大毫秒数。将使用默认时间%3毫秒。
+注册表值 %2（指定向应用窗口投递 WM_CLOSE 后等待服务 %1 停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 MessageId = +1
@@ -2065,7 +2066,7 @@ Language = English
 The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a WM_QUIT message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
 .
 Language = Chinese
-注册表值%2不是REG_DWORD类型，用于指定将WM_QUIT消息发布到应用程序管理的线程的消息队列后等待服务%1停止的最大毫秒数。将使用默认时间%3毫秒。
+注册表值 %2（指定向应用管理的线程消息队列投递 WM_QUIT 后等待服务 %1 停止的最大毫秒数）不是 REG_DWORD 类型。将使用默认值 %3 毫秒。
 .
 
 MessageId = +1
@@ -2076,8 +2077,8 @@ Language = English
 Next update in %4 milliseconds.
 .
 Language = Chinese
-%1等待%2服务退出的时间为%5毫秒中的%3毫秒。
-下次更新将在%4毫秒后进行。
+%1 已等待 %3/%5 毫秒以等待服务 %2 退出。
+下一次更新在 %4 毫秒后。
 .
 
 MessageId = +1
@@ -2099,7 +2100,9 @@ Language = English
 The minimum number of milliseconds which must pass before service %1 is considered to have been started successfully is set to %2.  Access to the Windows service control manager is blocked until the service updates its status, therefore %3 will wait a maximum of %4 milliseconds before reporting the service's state as running.  Service restart throttling will be enforced if the service runs for less than the full %2 milliseconds.
 .
 Language = Chinese
-服务%1被认为已成功启动之前必须经过的最小毫秒数设置为%2。在服务更新其状态之前，对Windows服务控制管理器的访问被阻止，因此%3将在报告服务的运行状态之前最多等待%4毫秒。如果服务运行时间少于完整的%2毫秒，将强制执行服务重新启动限制。
+将服务 %1 视为成功启动所需的最少毫秒数被设置为 %2。
+在服务上报状态前，访问服务控制管理器会被阻塞，因此 %3 最多等待 %4 毫秒后报告服务为"正在运行"。
+若服务实际运行少于 %2 毫秒，则会触发重启节流。
 .
 
 MessageId = +1
@@ -2123,8 +2126,8 @@ Failed to rotate output file %2 for service %1.
 %5
 .
 Language = Chinese
-无法rotate服务%1的输出文件%2。
-文件%4的%3失败：
+为服务 %1 轮转输出文件 %2 失败。
+%3 失败（文件 %4）：
 %5
 .
 
@@ -2137,7 +2140,7 @@ ChangeServiceConfig2() failed:
 %2
 .
 Language = Chinese
-设置服务%1的说明时出错。
+为服务 %1 设置描述失败。
 ChangeServiceConfig2() 失败：
 %2
 .
@@ -2151,7 +2154,7 @@ ChangeServiceConfig2() failed:
 %2
 .
 Language = Chinese
-配置服务%1的延迟启动时出错。服务将自动启动。
+为服务 %1 配置延迟自动启动失败；该服务将以自动启动方式运行。
 ChangeServiceConfig2() 失败：
 %2
 .
@@ -2166,10 +2169,9 @@ SetPriorityClass() function.
 Service %1 will be started with normal priority.
 .
 Language = Chinese
-用于指定服务%1的优先级类别的注册表值%2无效。
-%2应为REG_DWORD类型，并对应于
-SetPriorityClass() 函数。
-服务%1将以正常优先级启动。
+注册表值 %2（指定服务 %1 的优先级类）无效。
+%2 应为 REG_DWORD，并对应 SetPriorityClass() 的有效参数。
+服务 %1 将以"正常"优先级启动。
 .
 
 MessageId = +1
@@ -2180,8 +2182,8 @@ Requested affinity range %2 is invalid.
 Service %1 will be allowed to run on any CPU.
 .
 Language = Chinese
-请求的关联范围%2无效。
-将允许服务%1在任何CPU上运行。
+请求的亲和性范围 %2 无效。
+服务 %1 将允许在任意 CPU 上运行。
 .
 
 MessageId = +1
@@ -2193,9 +2195,9 @@ The maximal affinity range is %3 on this system.
 Service %1 will run with an affinity range of %4.
 .
 Language = Chinese
-请求的处理器关联范围%2不合适。
-此系统上的最大关联范围为%3。
-服务%1将在关联范围为%4的情况下运行。
+请求的处理器亲和性范围 %2 不合适。
+本机最大可用范围为 %3。
+服务 %1 将以 %4 的亲和性范围运行。
 .
 
 MessageId = +1
@@ -2206,8 +2208,8 @@ Failed to determine an appropriate affinity mask for service %1.
 GetProcessAffinityMask(): %2
 .
 Language = Chinese
-无法为服务%1确定适当的关联掩码。
-GetProcessAffinityMask(): %2
+无法为服务 %1 获取合适的亲和性掩码。
+GetProcessAffinityMask()：%2
 .
 
 MessageId = +1
@@ -2218,8 +2220,8 @@ Failed to set requested affinity mask for service %1.
 SetProcessAffinityMask(): %2
 .
 Language = Chinese
-无法为服务%1设置请求的关联掩码。
-SetProcessAffinityMask(): %2
+为服务 %1 设置请求的亲和性掩码失败。
+SetProcessAffinityMask()：%2
 .
 
 MessageId = +1
@@ -2230,8 +2232,8 @@ The registry value %2, used to specify the number of milliseconds by which resta
 No mandatory delay will be employed.
 .
 Language = Chinese
-用于指定服务%1重新启动的延迟毫秒数的注册表值%2不是REG_DWORD类型。
-不得强制延期。
+注册表值 %2（指定服务 %1 的重启延迟毫秒数）不是 REG_DWORD 类型。
+将不会采用强制延迟。
 .
 
 MessageId = +1
@@ -2241,7 +2243,7 @@ Language = English
 Restart of service %1 will be delayed by %2 milliseconds.
 .
 Language = Chinese
-服务%1的重新启动将延迟%2毫秒。
+服务 %1 的重启将延迟 %2 毫秒。
 .
 
 MessageId = +1
@@ -2253,9 +2255,9 @@ Rotation of log file %2 will not be possible while the service is running.
 CreatePipe(): %3
 .
 Language = Chinese
-无法设置从服务%1读取输出的管道。
-服务运行时，日志文件%2将无法Rotation。
-CreatePipe(): %3
+为读取服务 %1 的输出创建管道失败。
+在服务运行期间将无法轮转日志文件 %2。
+CreatePipe()：%3
 .
 
 MessageId = +1
@@ -2267,9 +2269,9 @@ If the error persists, no more data will be written to %2.
 ReadFile(): %3
 .
 Language = Chinese
-无法读取服务%1的输出。
-如果错误仍然存在，将不再向%2写入更多数据。
-ReadFile(): %3
+读取服务 %1 的输出失败。
+如果错误持续发生，将不再向 %2 写入更多数据。
+ReadFile()：%3
 .
 
 MessageId = +1
@@ -2281,9 +2283,9 @@ If the error persists, some data may be lost.
 WriteFile(): %3
 .
 Language = Chinese
-无法将服务%1的输出写入文件%2。
-如果错误仍然存在，某些数据可能会丢失。
-WriteFile(): %3
+将服务 %1 的输出写入文件 %2 失败。
+如果错误持续发生，可能会丢失部分数据。
+WriteFile()：%3
 .
 
 MessageId = +1
@@ -2296,10 +2298,9 @@ in UTF-16 format by applications which attempt to read it.
 WriteFile(): %3
 .
 Language = Chinese
-检测到服务%1的输出为UTF-16格式，但尝试写入适当的字节顺序标记失败。
-随后尝试将数据写入%2的操作可能会失败。如果成功，则可能无法识别该文件
-应用程序尝试读取UTF-16格式。
-WriteFile(): %3
+检测到服务 %1 的输出为 UTF-16，但写入相应的字节序标记（BOM）失败。
+后续向 %2 写入数据的尝试很可能失败；即使成功，该文件也可能不会被读取它的应用识别为 UTF-16 格式。
+WriteFile()：%3
 .
 
 MessageId = +1
@@ -2309,7 +2310,7 @@ Language = English
 Rotated output file %2 for service %1 to %3.
 .
 Language = Chinese
-已将服务%1的输出文件%2 Rotated到%3。
+已将服务 %1 的输出文件 %2 轮转为 %3。
 .
 
 MessageId = +1
@@ -2320,8 +2321,8 @@ Language = English
 Next update in %4 milliseconds.
 .
 Language = Chinese
-%1已等待%2句柄%5毫秒中的%3毫秒。
-下次更新将在%4毫秒后进行。
+%1 已等待 %3/%5 毫秒以等待句柄 %2。
+下一次更新在 %4 毫秒后。
 .
 
 MessageId = +1
@@ -2332,7 +2333,7 @@ The %1/%2 hook for service %3 returned exit code %4.
 Service startup will be aborted.
 .
 Language = Chinese
-服务%3的%1/%2挂钩返回退出代码%4。
+服务 %3 的 %1/%2 钩子返回退出码 %4。
 服务启动将被中止。
 .
 
@@ -2345,7 +2346,7 @@ CreateProcess() failed:
 %5
 .
 Language = Chinese
-无法为服务%3运行%1/%2挂钩。无法启动程序%4。
+运行服务 %3 的 %1/%2 钩子失败。无法启动程序 %4。
 CreateProcess() 失败：
 %5
 .
@@ -2357,5 +2358,5 @@ Language = English
 Failed to find a command for the %1/%2 hook for service %3 in the registry.
 .
 Language = Chinese
-在注册表中找不到服务%3的%1/%2挂钩的命令。
+在注册表中未找到服务 %3 的 %1/%2 钩子命令。
 .

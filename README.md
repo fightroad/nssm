@@ -13,35 +13,41 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 
 ## 构建方式
 ### 1) GitHub Actions（推荐，手动触发）
-仓库已提供工作流：`.github/workflows/build.yml`。默认仅构建 64 位 Release，并收集产物到 GitHub Artifacts。
+仓库已提供工作流：`.github/workflows/build.yml`。默认同时构建 32 位和 64 位 Release 版本，并收集产物到 GitHub Artifacts。
 
 触发方式：
 1. Push 代码到仓库。
 2. 在 GitHub 仓库的 “Actions” 标签页，选择 “Build NSSM” 工作流。
 3. 点击 “Run workflow” 手动运行。
-4. 构建完成后，在该运行记录页面下载 `nssm-win64-Release` 工件（包含 `.exe/.dll/.pdb`）。
+4. 构建完成后，在该运行记录页面下载 `nssm-win32-Release` 和 `nssm-win64-Release` 工件（包含 `.exe` 和 `.dll` 文件）。
 
 主要步骤（简述）：
 - Checkout 代码
 - 定位 VS 并获取 `devenv.com`
 - `devenv nssm.sln /Upgrade` 升级旧工程（VS2008 `.vcproj`）
-- `msbuild nssm.sln /p:Configuration=Release /p:Platform=win64 /m`
-- 收集 `out\Release\win64\*` 并上传 Artifacts
+- 使用 matrix 策略并行构建 win32 和 win64 平台（每个平台独立执行 `msbuild nssm.sln /p:Configuration=Release /p:Platform=win32|win64 /m`）
+- 分别收集 `out\Release\win32\*` 和 `out\Release\win64\*` 并上传 Artifacts
 
 ### 2) 本地构建（手动）
 前置条件：Windows + 安装 Visual Studio（建议 2019/2022，含 C++ 桌面开发组件）。
 
 步骤：
-1. 在 VS 开发者命令行或“x64 Native Tools Command Prompt”中进入仓库根目录。
+1. 在 VS 开发者命令行中进入仓库根目录（构建 32 位使用 "x86 Native Tools Command Prompt"，构建 64 位使用 "x64 Native Tools Command Prompt"）。
 2. 升级解决方案（仅首次或工程更新后执行）：
    ```cmd
    "<VS安装路径>\Common7\IDE\devenv.com" nssm.sln /Upgrade
    ```
-3. 使用 MSBuild 构建（仅 64 位 Release）：
+3. 使用 MSBuild 构建（32 位或 64 位 Release）：
    ```cmd
+   REM 构建 32 位版本
+   msbuild.exe nssm.sln /p:Configuration=Release /p:Platform=win32 /m
+   
+   REM 构建 64 位版本
    msbuild.exe nssm.sln /p:Configuration=Release /p:Platform=win64 /m
    ```
-4. 产物位置：`out\Release\win64\`。
+4. 产物位置：
+   - 32 位：`out\Release\win32\`
+   - 64 位：`out\Release\win64\`
 
 ## 使用与命令（摘要）
 参考官方命令行文档整理要点，详情见：[nssm commands](https://nssm.cc/commands)。
@@ -56,13 +62,16 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
   - 获取参数：`nssm get <ServiceName> <Parameter> [<Subparam>]`
   - 设置参数：`nssm set <ServiceName> <Parameter> [<Subparam>] <Value>`
   - 重置为默认：`nssm reset <ServiceName> <Parameter>`
+  - 删除参数：`nssm unset <ServiceName> <Parameter> [<Subparam>]`
 
 - 启动/停止/重启/状态
   - 启动：`nssm start <ServiceName>`
   - 停止：`nssm stop <ServiceName>`
   - 重启：`nssm restart <ServiceName>`
   - 状态：`nssm status <ServiceName>`
+  - 状态码：`nssm statuscode <ServiceName>`
   - 控制：`nssm pause <ServiceName>` / `nssm continue <ServiceName>` / `nssm rotate <ServiceName>`（按需轮转需启用在线轮转）
+  - 进程树：`nssm processes <ServiceName>`
 
 - 账户与登录（Log on）
   - 本地系统账户：`nssm set <ServiceName> ObjectName LocalSystem`
@@ -122,10 +131,12 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
     - 启动类型：`Start`（AUTO/DELAYED_AUTO/DEMAND/DISABLED）
     - 类型：`Type`（WIN32_OWN_PROCESS 或 INTERACTIVE_PROCESS；后者需 LocalSystem）
 
-- 移除
-  - `nssm remove`
-  - `nssm remove <ServiceName>`
-  - 无确认：`nssm remove <ServiceName> confirm`
+- 其他命令
+  - 列出所有 NSSM 管理的服务：`nssm list`
+  - 显示版本信息：`nssm version` 或 `nssm -v`
+  - 移除服务：
+    - GUI：`nssm remove [<ServiceName>]`
+    - 直接移除：`nssm remove <ServiceName> confirm`
 
 ## GUI 选项卡说明
 
@@ -133,12 +144,9 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 - 指定可执行文件路径、启动参数、工作目录。
 - 常见项：`Application`、`Arguments`、`AppDirectory`。
 
-### 服务
+### 详情
 - 设置显示名称、描述、启动类型（自动/延迟自动/手动/禁用）。
 - 常见项：`DisplayName`、`Description`、`Start`。
-
-### 详情
-- 查看/编辑服务的只读或派生信息（服务名、二进制路径等），便于核对。
 
 ### 登录
 - 设置服务运行账户与密码，或使用 `LocalSystem`。
@@ -220,5 +228,5 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 | 账户与权限 | `account.cpp` | 账户名与 SID 互转、规范化；判断 LocalSystem/虚拟账户；授予“作为服务登录”权限；用户名等价性判断。 |
 | 事件钩子执行 | `hook.cpp` | 钩子事件/动作（start/stop/exit/power/rotate 的 pre/post/change/resume）；设置环境注入上下文变量；同步/异步执行与超时；清理钩子进程树，记录结果。 |
 | 资源与版本信息 | `nssm.rc`, `resource.h`, `version.h` | 程序版本、图标与对话框资源；英文与简体中文 GUI；版本元数据来自 `version.h` 固定宏。 |
-| 事件消息定义 | `messages.mc` | 事件日志与界面提示文本；当前仅保留英文语言块，GUI 相关文本已中文化；用于 `mc.exe` 生成消息表。 |
+| 事件消息定义 | `messages.mc` | 事件日志与界面提示文本；包含英文和简体中文语言块，GUI 相关文本已中文化；用于 `mc.exe` 生成消息表。 |
 

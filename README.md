@@ -2,12 +2,22 @@
 
 NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理的工具，提供安装/编辑/移除、启动/停止/重启、I/O 重定向、环境变量与工作目录等能力。
 
+## 兼容性说明
+- 最低支持系统：Windows 7（`_WIN32_WINNT=0x0601`）。
+- 交互式服务（`SERVICE_INTERACTIVE_PROCESS`，“与桌面交互”）在 Win7+ 已不再作为可用能力，GUI 中已移除相关选项。
+
 ![NSSM 界面](doc/界面.png)
 
 ### 版本说明
 本仓库基于 NSSM 原作（作者 Iain Patterson，上游网站：[nssm.cc](https://nssm.cc/)），遵循 Public Domain 许可。
-在原版基础上主要进行了：
-- 中文本地化（GUI 与消息文本）
+在原版基础上主要进行了以下维护与增强：
+- 版本信息升级到 `3.0.0`（`version.h`）。
+- 最低系统基线明确为 Windows 7（`_WIN32_WINNT=0x0601`）。
+- 清理并修复多处稳定性问题（句柄泄漏、内存释放一致性、边界/指针判断、注册表类型校验等）。
+- 服务类型与现代 Windows 行为对齐：不再使用交互式服务类型，统一按 `SERVICE_WIN32_OWN_PROCESS` 处理。
+- GUI 调整：移除 Win7+ 无效的“与桌面交互”选项，避免误导。
+- 中文文案持续校对与统一（GUI 与 `messages.mc`），修复中英混杂和术语不一致问题。
+- 构建链路完善：补充并验证 32/64 位 Release 构建流程与 CI 工作流。
 
 核心功能与命令行参数保持与原版兼容；如需原版发布与英文文档，请参见上游站点。
 
@@ -129,7 +139,7 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
   - 原生属性：
     - 依赖：`DependOnService` / `DependOnGroup`
     - 启动类型：`Start`（AUTO/DELAYED_AUTO/DEMAND/DISABLED）
-    - 类型：`Type`（WIN32_OWN_PROCESS 或 INTERACTIVE_PROCESS；后者需 LocalSystem）
+    - 类型：`Type`（仅 `WIN32_OWN_PROCESS`；`INTERACTIVE_PROCESS` 在 Win7+ 不作为受支持配置）
 
 - 其他命令
   - 列出所有 NSSM 管理的服务：`nssm list`
@@ -149,7 +159,7 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 - 常见项：`DisplayName`、`Description`、`Start`。
 
 ### 登录
-- 设置服务运行账户与密码，或使用 `LocalSystem`。
+- 设置服务运行账户与密码，或使用 `LocalSystem`/虚拟服务账户。
 - 常见项：`ObjectName`（用户名与可选密码）。
 
 ### 依赖
@@ -165,8 +175,9 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 - 常见项：`AppStopMethodSkip`、`AppStopMethodConsole/Window/Threads`（毫秒）。
 
 ### 退出操作
-- 为默认或特定退出码配置操作：重启/忽略/退出（一次性模式）。
+- 为默认或特定退出码配置操作：重启/忽略/退出（一次性模式）/假崩溃（遗留兼容）。
 - 常见项：`AppExit Default Restart|Ignore|Exit`，以及针对码值的映射。
+  - 说明：`假崩溃（遗留兼容）` 对应 `Suicide`，用于兼容历史恢复策略；在 Win7+ 仍可用，但通常不建议作为首选策略。
 
 ### I/O
 - 作用：将服务进程的标准输出(stdout)与标准错误(stderr)写入到文件，便于排查问题。
@@ -229,4 +240,18 @@ NSSM 是一个将任意可执行程序作为 Windows 服务运行并进行管理
 | 事件钩子执行 | `hook.cpp` | 钩子事件/动作（start/stop/exit/power/rotate 的 pre/post/change/resume）；设置环境注入上下文变量；同步/异步执行与超时；清理钩子进程树，记录结果。 |
 | 资源与版本信息 | `nssm.rc`, `resource.h`, `version.h` | 程序版本、图标与对话框资源；英文与简体中文 GUI；版本元数据来自 `version.h` 固定宏。 |
 | 事件消息定义 | `messages.mc` | 事件日志与界面提示文本；包含英文和简体中文语言块，GUI 相关文本已中文化；用于 `mc.exe` 生成消息表。 |
+
+### 头文件接口层（建议入口）
+- 核心头文件：`nssm.h`、`service.h`、`settings.h`、`registry.h`、`process.h`、`io.h`、`event.h`。
+- 作用：定义跨模块结构体、常量、注册表参数名与公共函数声明，是理解模块边界和调用关系的首选入口。
+
+### 消息编译链路
+- 文本来源：`messages.mc`（中英文消息模板）。
+- 构建产物：通过消息编译工具（`mc.exe`）与资源编译流程生成消息资源，最终由程序/事件日志加载使用。
+- 说明：运行时不会直接读取 `.mc`，而是读取编译后的消息表资源。
+
+### 测试与验证现状
+- 当前以本地构建与 GitHub Actions 构建成功作为主要回归验证手段。
+- 运行验证主要依赖手工安装/编辑/启停服务与日志轮转场景检查。
+- 目前仓库内未提供系统化单元测试/集成测试框架，后续可按模块逐步补齐。
 

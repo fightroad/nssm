@@ -169,6 +169,8 @@ int test_environment(TCHAR *env) {
   */
   if (CreateProcess(0, path, 0, 0, 0, flags, env, 0, &si, &pi)) {
     TerminateProcess(pi.hProcess, 0);
+    if (pi.hThread) CloseHandle(pi.hThread);
+    if (pi.hProcess) CloseHandle(pi.hProcess);
   }
   else {
     unsigned long error = GetLastError();

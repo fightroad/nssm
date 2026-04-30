@@ -25,11 +25,21 @@ TCHAR *error_string(unsigned long error) {
 
 /* Convert message code to format string */
 TCHAR *message_string(unsigned long error) {
+  /* The returned pointer MUST be freed by the caller with LocalFree(). */
   TCHAR *ret;
-  if (! FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS, 0, error, GetUserDefaultLangID(), (LPTSTR) &ret, NSSM_ERROR_BUFSIZE, 0)) {
-    if (! FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS, 0, error, 0, (LPTSTR) &ret, NSSM_ERROR_BUFSIZE, 0)) {
-      ret = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, 32 * sizeof(TCHAR));
-      if (_sntprintf_s(ret, NSSM_ERROR_BUFSIZE, _TRUNCATE, _T("system error %lu"), error) < 0) return 0;
+  HMODULE module = GetModuleHandle(0);
+  if (! FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS, module, error, GetUserDefaultLangID(), (LPTSTR) &ret, NSSM_ERROR_BUFSIZE, 0)) {
+    if (! FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS, module, error, 0, (LPTSTR) &ret, NSSM_ERROR_BUFSIZE, 0)) {
+      /*
+        Callers expect to free the returned pointer with LocalFree(), so the
+        fallback allocation must also be compatible with LocalFree().
+      */
+      ret = (TCHAR *) LocalAlloc(LPTR, NSSM_ERROR_BUFSIZE * sizeof(TCHAR));
+      if (! ret) return 0;
+      if (_sntprintf_s(ret, NSSM_ERROR_BUFSIZE, _TRUNCATE, _T("system error %lu"), error) < 0) {
+        LocalFree(ret);
+        return 0;
+      }
     }
   }
   return ret;
@@ -69,7 +79,7 @@ void print_message(FILE *file, unsigned long id, ...) {
   _vftprintf(file, format, arg);
   va_end(arg);
 
-  LocalFree(format);
+  free_message_string(format);
 }
 
 /* Show a GUI dialogue */
@@ -85,7 +95,7 @@ int popup_message(HWND owner, unsigned int type, unsigned long id, ...) {
   va_start(arg, id);
   if (_vsntprintf_s(blurb, _countof(blurb), _TRUNCATE, format, arg) < 0) {
     va_end(arg);
-    LocalFree(format);
+    free_message_string(format);
     return MessageBox(0, _T("The message which was supposed to go here is too big!"), NSSM, MB_OK | MB_ICONEXCLAMATION);
   }
   va_end(arg);
@@ -105,7 +115,7 @@ int popup_message(HWND owner, unsigned int type, unsigned long id, ...) {
 
   int ret = MessageBoxIndirect(&params);
 
-  LocalFree(format);
+  free_message_string(format);
 
   return ret;
 }

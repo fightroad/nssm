@@ -159,7 +159,7 @@ int affinity_mask_to_string(__int64 mask, TCHAR **string) {
   /* Worst case is 2x2 characters for first and last CPU plus - and/or , */
   size_t len = (size_t) (n + 1) * 6;
   *string = (TCHAR *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, len * sizeof(TCHAR));
-  if (! string) return 2;
+  if (! *string) return 2;
 
   size_t s = 0;
   int ret;
@@ -664,7 +664,7 @@ int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
 
   HeapFree(GetProcessHeap(), 0, qsc);
 
-  if (! *buffer[0]) {
+  if (! (*buffer)[0]) {
     HeapFree(GetProcessHeap(), 0, *buffer);
     *buffer = 0;
     *bufsize = 0;
@@ -1258,11 +1258,9 @@ int edit_service(nssm_service_t *service, bool editing) {
   if (! service) return 1;
 
   /*
-    The only two valid flags for service type are SERVICE_WIN32_OWN_PROCESS
-    and SERVICE_INTERACTIVE_PROCESS.
+    Project baseline is Windows 7+: interactive services are unsupported.
   */
-  service->type &= SERVICE_INTERACTIVE_PROCESS;
-  service->type |= SERVICE_WIN32_OWN_PROCESS;
+  service->type = SERVICE_WIN32_OWN_PROCESS;
 
   /* Startup type. */
   unsigned long startup;
@@ -1566,7 +1564,11 @@ void WINAPI service_main(unsigned long argc, TCHAR **argv) {
 
   /* Initialise status */
   ZeroMemory(&service->status, sizeof(service->status));
-  service->status.dwServiceType = SERVICE_WIN32_OWN_PROCESS | SERVICE_INTERACTIVE_PROCESS;
+  /*
+    On modern Windows, interactive services are effectively unsupported due to
+    Session 0 isolation. Report our base service type consistently.
+  */
+  service->status.dwServiceType = SERVICE_WIN32_OWN_PROCESS;
   service->status.dwControlsAccepted = 0;
   service->status.dwWin32ExitCode = NO_ERROR;
   service->status.dwServiceSpecificExitCode = 0;
@@ -1898,7 +1900,7 @@ int start_service(nssm_service_t *service) {
     if (si.dwFlags & STARTF_USESTDHANDLES) inherit_handles = true;
     unsigned long flags = service->priority & priority_mask();
     if (service->affinity) flags |= CREATE_SUSPENDED;
-    if (! service->no_console) flags |= CREATE_NEW_CONSOLE;
+    if (! service->no_console) flags |= CREATE_NEW_CONSOLE;
     if (! CreateProcess(0, cmd, 0, 0, inherit_handles, flags, 0, service->dir, &si, &pi)) {
       unsigned long exitcode = 3;
       unsigned long error = GetLastError();
@@ -1943,6 +1945,8 @@ int start_service(nssm_service_t *service) {
 
       ResumeThread(pi.hThread);
     }
+    /* We never use the primary thread handle beyond optional ResumeThread(). */
+    if (pi.hThread) CloseHandle(pi.hThread);
   }
 
   /* Restore our environment. */

@@ -27,7 +27,8 @@ static HWND dialog(const TCHAR *templ, HWND parent, DLGPROC function) {
 }
 
 static inline void set_logon_enabled(unsigned char interact_enabled, unsigned char credentials_enabled) {
-  EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_INTERACT), interact_enabled);
+  /* Project baseline is Windows 7+: interactive services are unsupported. */
+  EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_INTERACT), 0);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_USERNAME), credentials_enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD1), credentials_enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD2), credentials_enabled);
@@ -105,7 +106,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     }
     else {
       CheckRadioButton(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, IDC_VIRTUAL_SERVICE, IDC_LOCALSYSTEM);
-      if (service->type & SERVICE_INTERACTIVE_PROCESS) SendDlgItemMessage(tablist[NSSM_TAB_LOGON], IDC_INTERACT, BM_SETCHECK, BST_CHECKED, 0);
+      SendDlgItemMessage(tablist[NSSM_TAB_LOGON], IDC_INTERACT, BM_SETCHECK, BST_UNCHECKED, 0);
     }
 
     /* Dependencies tab. */
@@ -307,37 +308,37 @@ static inline void set_hook_tab(int event_index, int action_index, bool changed)
   switch (event_index + first_event) {
     case NSSM_GUI_HOOK_EVENT_ROTATE:
       i = 0;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_ROTATE_PRE));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_ROTATE_PRE);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_PRE;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_ROTATE_POST));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_ROTATE_POST);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_POST;
       break;
 
     case NSSM_GUI_HOOK_EVENT_START:
       i = 0;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_START_PRE));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_START_PRE);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_PRE;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_START_POST));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_START_POST);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_POST;
       break;
 
     case NSSM_GUI_HOOK_EVENT_STOP:
       i = 0;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_STOP_PRE));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_STOP_PRE);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_PRE;
       break;
 
     case NSSM_GUI_HOOK_EVENT_EXIT:
       i = 0;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_EXIT_POST));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_EXIT_POST);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_POST;
       break;
 
     case NSSM_GUI_HOOK_EVENT_POWER:
       i = 0;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_POWER_CHANGE));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_POWER_CHANGE);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_CHANGE;
-      SendMessage(combo, CB_INSERTSTRING, i, (LPARAM) message_string(NSSM_GUI_HOOK_ACTION_POWER_RESUME));
+      combo_insert_message_string(combo, i, NSSM_GUI_HOOK_ACTION_POWER_RESUME);
       if (action_index == i++) hook_action = NSSM_HOOK_ACTION_RESUME;
       break;
   }
@@ -451,9 +452,6 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
   /* Get logon stuff. */
   if (SendDlgItemMessage(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, BM_GETCHECK, 0, 0) & BST_CHECKED) {
-    if (SendDlgItemMessage(tablist[NSSM_TAB_LOGON], IDC_INTERACT, BM_GETCHECK, 0, 0) & BST_CHECKED) {
-      service->type |= SERVICE_INTERACTIVE_PROCESS;
-    }
     if (service->username) HeapFree(GetProcessHeap(), 0, service->username);
     service->username = 0;
     service->usernamelen = 0;
@@ -894,6 +892,26 @@ static TCHAR *browse_filter(int message) {
   }
 }
 
+static void combo_insert_message_string(HWND combo, WPARAM index, unsigned long id) {
+  if (! combo) return;
+  TCHAR *s = message_string(id);
+  if (! s) return;
+  SendMessage(combo, CB_INSERTSTRING, index, (LPARAM) s);
+  free_message_string(s);
+}
+
+static void tab_insert_message_string(HWND tabs, WPARAM index, unsigned long id) {
+  if (! tabs) return;
+  TCITEM tab;
+  ZeroMemory(&tab, sizeof(tab));
+  tab.mask = TCIF_TEXT;
+  tab.pszText = message_string(id);
+  if (! tab.pszText) return;
+  tab.cchTextMax = (int) _tcslen(tab.pszText);
+  SendMessage(tabs, TCM_INSERTITEM, index, (LPARAM) &tab);
+  free_message_string(tab.pszText);
+}
+
 UINT_PTR CALLBACK browse_hook(HWND dlg, UINT message, WPARAM w, LPARAM l) {
   switch (message) {
     case WM_INITDIALOG:
@@ -903,42 +921,83 @@ UINT_PTR CALLBACK browse_hook(HWND dlg, UINT message, WPARAM w, LPARAM l) {
   return 0;
 }
 
+static int append_browse_filter_part(TCHAR **buffer, size_t *capacity, size_t *used, const TCHAR *part) {
+  if (! buffer || ! capacity || ! used) return 1;
+  if (! *buffer || ! *capacity) return 1;
+  if (! part) part = _T("");
+
+  size_t partlen = _tcslen(part);
+
+  /* Need: part + NULL */
+  size_t required = *used + partlen + 1;
+  if (required + 1 > *capacity) {
+    size_t newcap = *capacity;
+    while (required + 1 > newcap) {
+      if (newcap > (size_t) -1 / 2) return 2;
+      newcap *= 2;
+    }
+    TCHAR *bigger = (TCHAR *) HeapReAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, *buffer, newcap * sizeof(TCHAR));
+    if (! bigger) return 3;
+    *buffer = bigger;
+    *capacity = newcap;
+  }
+
+  memmove((*buffer) + *used, part, partlen * sizeof(TCHAR));
+  *used += partlen;
+  (*buffer)[(*used)++] = _T('\0');
+  return 0;
+}
+
 /* Browse for application */
 void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
   if (! window) return;
 
   va_list arg;
   size_t bufsize = 256;
-  size_t len = bufsize;
+  size_t len = 0;
   int i;
 
   OPENFILENAME ofn;
   ZeroMemory(&ofn, sizeof(ofn));
   ofn.lStructSize = sizeof(ofn);
-  ofn.lpstrFilter = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, bufsize * sizeof(TCHAR));
-  /* XXX: Escaping nulls with FormatMessage is tricky */
+  ofn.lpstrFilter = (TCHAR *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, bufsize * sizeof(TCHAR));
   if (ofn.lpstrFilter) {
-    ZeroMemory((void *) ofn.lpstrFilter, bufsize);
-    len = 0;
     /* "Applications" + NULL + "*.exe" + NULL */
     va_start(arg, flags);
     while (i = va_arg(arg, int)) {
       TCHAR *localised = message_string(i);
-      _sntprintf_s((TCHAR *) ofn.lpstrFilter + len, bufsize - len, _TRUNCATE, localised);
-      len += _tcslen(localised) + 1;
-      LocalFree(localised);
+      if (localised) {
+        if (append_browse_filter_part((TCHAR **) &ofn.lpstrFilter, &bufsize, &len, localised)) {
+          /* Fall back to a safe filter on allocation failure. */
+          ZeroMemory(ofn.lpstrFilter, bufsize * sizeof(TCHAR));
+          _sntprintf_s(ofn.lpstrFilter, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
+          len = _tcslen(ofn.lpstrFilter) + 1;
+          ofn.lpstrFilter[len] = _T('\0');
+          free_message_string(localised);
+          break;
+        }
+        free_message_string(localised);
+      }
       TCHAR *filter = browse_filter(i);
-      _sntprintf_s((TCHAR *) ofn.lpstrFilter + len, bufsize - len, _TRUNCATE, _T("%s"), filter);
-      len += _tcslen(filter) + 1;
+      if (append_browse_filter_part((TCHAR **) &ofn.lpstrFilter, &bufsize, &len, filter)) {
+        ZeroMemory(ofn.lpstrFilter, bufsize * sizeof(TCHAR));
+        _sntprintf_s(ofn.lpstrFilter, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
+        len = _tcslen(ofn.lpstrFilter) + 1;
+        ofn.lpstrFilter[len] = _T('\0');
+        break;
+      }
     }
     va_end(arg);
-    /* Remainder of the buffer is already zeroed */
+    /* Ensure double-NULL termination. */
+    if (len + 1 < bufsize) ofn.lpstrFilter[len] = _T('\0');
   }
   ofn.lpstrFile = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, PATH_LENGTH * sizeof(TCHAR));
   if (ofn.lpstrFile) {
     if (flags & OFN_NOVALIDATE) {
       /* Directory hack. */
-      _sntprintf_s(ofn.lpstrFile, PATH_LENGTH, _TRUNCATE, _T(":%s:"), message_string(NSSM_GUI_BROWSE_FILTER_DIRECTORIES));
+      TCHAR *dir = message_string(NSSM_GUI_BROWSE_FILTER_DIRECTORIES);
+      _sntprintf_s(ofn.lpstrFile, PATH_LENGTH, _TRUNCATE, _T(":%s:"), dir ? dir : _T(""));
+      free_message_string(dir);
       ofn.nMaxFile = DIR_LENGTH;
     }
     else {
@@ -946,7 +1005,8 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
       ofn.nMaxFile = PATH_LENGTH;
     }
   }
-  ofn.lpstrTitle = message_string(NSSM_GUI_BROWSE_TITLE);
+  TCHAR *title = message_string(NSSM_GUI_BROWSE_TITLE);
+  ofn.lpstrTitle = title;
   ofn.Flags = OFN_EXPLORER | OFN_HIDEREADONLY | OFN_PATHMUSTEXIST | flags;
 
   if (GetOpenFileName(&ofn)) {
@@ -954,6 +1014,7 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
     if (flags & OFN_NOVALIDATE) strip_basename(ofn.lpstrFile);
     SendMessage(window, WM_SETTEXT, 0, (LPARAM) ofn.lpstrFile);
   }
+  free_message_string(title);
   if (ofn.lpstrFilter) HeapFree(GetProcessHeap(), 0, (void *) ofn.lpstrFilter);
   if (ofn.lpstrFile) HeapFree(GetProcessHeap(), 0, ofn.lpstrFile);
 }
@@ -1105,17 +1166,11 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       if (! tabs) return 0;
 
       /* Set up tabs. */
-      TCITEM tab;
-      ZeroMemory(&tab, sizeof(tab));
-      tab.mask = TCIF_TEXT;
-
       selected_tab = 0;
 
       /* Application tab. */
-      if (service->native) tab.pszText = message_string(NSSM_GUI_TAB_NATIVE);
-      else tab.pszText = message_string(NSSM_GUI_TAB_APPLICATION);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_APPLICATION, (LPARAM) &tab);
+      if (service->native) tab_insert_message_string(tabs, NSSM_TAB_APPLICATION, NSSM_GUI_TAB_NATIVE);
+      else tab_insert_message_string(tabs, NSSM_TAB_APPLICATION, NSSM_GUI_TAB_APPLICATION);
       if (service->native) {
         tablist[NSSM_TAB_APPLICATION] = dialog(MAKEINTRESOURCE(IDD_NATIVE), window, tab_dlg);
         EnableWindow(tablist[NSSM_TAB_APPLICATION], 0);
@@ -1125,24 +1180,20 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       ShowWindow(tablist[NSSM_TAB_APPLICATION], SW_SHOW);
 
       /* Details tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_DETAILS);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_DETAILS, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_DETAILS, NSSM_GUI_TAB_DETAILS);
       tablist[NSSM_TAB_DETAILS] = dialog(MAKEINTRESOURCE(IDD_DETAILS), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_DETAILS], SW_HIDE);
 
       /* Set defaults. */
       combo = GetDlgItem(tablist[NSSM_TAB_DETAILS], IDC_STARTUP);
-      SendMessage(combo, CB_INSERTSTRING, NSSM_STARTUP_AUTOMATIC, (LPARAM) message_string(NSSM_GUI_STARTUP_AUTOMATIC));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_STARTUP_DELAYED, (LPARAM) message_string(NSSM_GUI_STARTUP_DELAYED));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_STARTUP_MANUAL, (LPARAM) message_string(NSSM_GUI_STARTUP_MANUAL));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_STARTUP_DISABLED, (LPARAM) message_string(NSSM_GUI_STARTUP_DISABLED));
+      combo_insert_message_string(combo, NSSM_STARTUP_AUTOMATIC, NSSM_GUI_STARTUP_AUTOMATIC);
+      combo_insert_message_string(combo, NSSM_STARTUP_DELAYED, NSSM_GUI_STARTUP_DELAYED);
+      combo_insert_message_string(combo, NSSM_STARTUP_MANUAL, NSSM_GUI_STARTUP_MANUAL);
+      combo_insert_message_string(combo, NSSM_STARTUP_DISABLED, NSSM_GUI_STARTUP_DISABLED);
       SendMessage(combo, CB_SETCURSEL, NSSM_STARTUP_AUTOMATIC, 0);
 
       /* Logon tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_LOGON);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_LOGON, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_LOGON, NSSM_GUI_TAB_LOGON);
       tablist[NSSM_TAB_LOGON] = dialog(MAKEINTRESOURCE(IDD_LOGON), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_LOGON], SW_HIDE);
 
@@ -1151,9 +1202,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       set_logon_enabled(1, 0);
 
       /* Dependencies tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_DEPENDENCIES);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_DEPENDENCIES, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_DEPENDENCIES, NSSM_GUI_TAB_DEPENDENCIES);
       tablist[NSSM_TAB_DEPENDENCIES] = dialog(MAKEINTRESOURCE(IDD_DEPENDENCIES), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_DEPENDENCIES], SW_HIDE);
 
@@ -1161,20 +1210,18 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       if (service->native) return 1;
 
       /* Process tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_PROCESS);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_PROCESS, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_PROCESS, NSSM_GUI_TAB_PROCESS);
       tablist[NSSM_TAB_PROCESS] = dialog(MAKEINTRESOURCE(IDD_PROCESS), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_PROCESS], SW_HIDE);
 
       /* Set defaults. */
       combo = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_PRIORITY);
-      SendMessage(combo, CB_INSERTSTRING, NSSM_REALTIME_PRIORITY, (LPARAM) message_string(NSSM_GUI_REALTIME_PRIORITY_CLASS));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_HIGH_PRIORITY, (LPARAM) message_string(NSSM_GUI_HIGH_PRIORITY_CLASS));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_ABOVE_NORMAL_PRIORITY, (LPARAM) message_string(NSSM_GUI_ABOVE_NORMAL_PRIORITY_CLASS));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_NORMAL_PRIORITY, (LPARAM) message_string(NSSM_GUI_NORMAL_PRIORITY_CLASS));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_BELOW_NORMAL_PRIORITY, (LPARAM) message_string(NSSM_GUI_BELOW_NORMAL_PRIORITY_CLASS));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_IDLE_PRIORITY, (LPARAM) message_string(NSSM_GUI_IDLE_PRIORITY_CLASS));
+      combo_insert_message_string(combo, NSSM_REALTIME_PRIORITY, NSSM_GUI_REALTIME_PRIORITY_CLASS);
+      combo_insert_message_string(combo, NSSM_HIGH_PRIORITY, NSSM_GUI_HIGH_PRIORITY_CLASS);
+      combo_insert_message_string(combo, NSSM_ABOVE_NORMAL_PRIORITY, NSSM_GUI_ABOVE_NORMAL_PRIORITY_CLASS);
+      combo_insert_message_string(combo, NSSM_NORMAL_PRIORITY, NSSM_GUI_NORMAL_PRIORITY_CLASS);
+      combo_insert_message_string(combo, NSSM_BELOW_NORMAL_PRIORITY, NSSM_GUI_BELOW_NORMAL_PRIORITY_CLASS);
+      combo_insert_message_string(combo, NSSM_IDLE_PRIORITY, NSSM_GUI_IDLE_PRIORITY_CLASS);
       SendMessage(combo, CB_SETCURSEL, NSSM_NORMAL_PRIORITY, 0);
 
       SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_CONSOLE, BM_SETCHECK, BST_CHECKED, 0);
@@ -1211,9 +1258,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       set_affinity_enabled(0);
 
       /* Shutdown tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_SHUTDOWN);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_SHUTDOWN, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_SHUTDOWN, NSSM_GUI_TAB_SHUTDOWN);
       tablist[NSSM_TAB_SHUTDOWN] = dialog(MAKEINTRESOURCE(IDD_SHUTDOWN), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_SHUTDOWN], SW_HIDE);
 
@@ -1228,26 +1273,22 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       SendDlgItemMessage(tablist[NSSM_TAB_SHUTDOWN], IDC_KILL_PROCESS_TREE, BM_SETCHECK, BST_CHECKED, 1);
 
       /* Restart tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_EXIT);
-      tab.cchTextMax = (int) _tcslen(tab.pszText);
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_EXIT, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_EXIT, NSSM_GUI_TAB_EXIT);
       tablist[NSSM_TAB_EXIT] = dialog(MAKEINTRESOURCE(IDD_APPEXIT), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_EXIT], SW_HIDE);
 
       /* Set defaults. */
       SetDlgItemInt(tablist[NSSM_TAB_EXIT], IDC_THROTTLE, NSSM_RESET_THROTTLE_RESTART, 0);
       combo = GetDlgItem(tablist[NSSM_TAB_EXIT], IDC_APPEXIT);
-      SendMessage(combo, CB_INSERTSTRING, NSSM_EXIT_RESTART, (LPARAM) message_string(NSSM_GUI_EXIT_RESTART));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_EXIT_IGNORE, (LPARAM) message_string(NSSM_GUI_EXIT_IGNORE));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_EXIT_REALLY, (LPARAM) message_string(NSSM_GUI_EXIT_REALLY));
-      SendMessage(combo, CB_INSERTSTRING, NSSM_EXIT_UNCLEAN, (LPARAM) message_string(NSSM_GUI_EXIT_UNCLEAN));
+      combo_insert_message_string(combo, NSSM_EXIT_RESTART, NSSM_GUI_EXIT_RESTART);
+      combo_insert_message_string(combo, NSSM_EXIT_IGNORE, NSSM_GUI_EXIT_IGNORE);
+      combo_insert_message_string(combo, NSSM_EXIT_REALLY, NSSM_GUI_EXIT_REALLY);
+      combo_insert_message_string(combo, NSSM_EXIT_UNCLEAN, NSSM_GUI_EXIT_UNCLEAN);
       SendMessage(combo, CB_SETCURSEL, NSSM_EXIT_RESTART, 0);
       SetDlgItemInt(tablist[NSSM_TAB_EXIT], IDC_RESTART_DELAY, 0, 0);
 
       /* I/O tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_IO);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_IO, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_IO, NSSM_GUI_TAB_IO);
       tablist[NSSM_TAB_IO] = dialog(MAKEINTRESOURCE(IDD_IO), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_IO], SW_HIDE);
 
@@ -1255,9 +1296,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       SendDlgItemMessage(tablist[NSSM_TAB_IO], IDC_TIMESTAMP, BM_SETCHECK, BST_UNCHECKED, 0);
 
       /* Rotation tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_ROTATION);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_ROTATION, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_ROTATION, NSSM_GUI_TAB_ROTATION);
       tablist[NSSM_TAB_ROTATION] = dialog(MAKEINTRESOURCE(IDD_ROTATION), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_ROTATION], SW_HIDE);
 
@@ -1268,26 +1307,22 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
       set_rotation_enabled(0);
 
       /* Environment tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_ENVIRONMENT);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_ENVIRONMENT, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_ENVIRONMENT, NSSM_GUI_TAB_ENVIRONMENT);
       tablist[NSSM_TAB_ENVIRONMENT] = dialog(MAKEINTRESOURCE(IDD_ENVIRONMENT), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_ENVIRONMENT], SW_HIDE);
 
       /* Hooks tab. */
-      tab.pszText = message_string(NSSM_GUI_TAB_HOOKS);
-      tab.cchTextMax = (int) _tcslen(tab.pszText) + 1;
-      SendMessage(tabs, TCM_INSERTITEM, NSSM_TAB_HOOKS, (LPARAM) &tab);
+      tab_insert_message_string(tabs, NSSM_TAB_HOOKS, NSSM_GUI_TAB_HOOKS);
       tablist[NSSM_TAB_HOOKS] = dialog(MAKEINTRESOURCE(IDD_HOOKS), window, tab_dlg);
       ShowWindow(tablist[NSSM_TAB_HOOKS], SW_HIDE);
 
       /* Set defaults. */
       combo = GetDlgItem(tablist[NSSM_TAB_HOOKS], IDC_HOOK_EVENT);
-      SendMessage(combo, CB_INSERTSTRING, -1, (LPARAM) message_string(NSSM_GUI_HOOK_EVENT_START));
-      SendMessage(combo, CB_INSERTSTRING, -1, (LPARAM) message_string(NSSM_GUI_HOOK_EVENT_STOP));
-      SendMessage(combo, CB_INSERTSTRING, -1, (LPARAM) message_string(NSSM_GUI_HOOK_EVENT_EXIT));
-      SendMessage(combo, CB_INSERTSTRING, -1, (LPARAM) message_string(NSSM_GUI_HOOK_EVENT_POWER));
-      SendMessage(combo, CB_INSERTSTRING, -1, (LPARAM) message_string(NSSM_GUI_HOOK_EVENT_ROTATE));
+      combo_insert_message_string(combo, (WPARAM) -1, NSSM_GUI_HOOK_EVENT_START);
+      combo_insert_message_string(combo, (WPARAM) -1, NSSM_GUI_HOOK_EVENT_STOP);
+      combo_insert_message_string(combo, (WPARAM) -1, NSSM_GUI_HOOK_EVENT_EXIT);
+      combo_insert_message_string(combo, (WPARAM) -1, NSSM_GUI_HOOK_EVENT_POWER);
+      combo_insert_message_string(combo, (WPARAM) -1, NSSM_GUI_HOOK_EVENT_ROTATE);
       SendDlgItemMessage(tablist[NSSM_TAB_HOOKS], IDC_REDIRECT_HOOK, BM_SETCHECK, BST_UNCHECKED, 0);
       if (_tcslen(service->name)) {
         TCHAR hook_name[HOOK_NAME_LENGTH];

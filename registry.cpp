@@ -37,7 +37,7 @@ static long open_registry_key(const TCHAR *registry, REGSAM sam, HKEY *key, bool
 }
 
 static HKEY open_registry_key(const TCHAR *registry, REGSAM sam, bool must_exist) {
-  HKEY key;
+  HKEY key = 0;
   long error = open_registry_key(registry, sam, &key, must_exist);
   return key;
 }
@@ -64,6 +64,7 @@ int create_messages() {
   unsigned long types = EVENTLOG_INFORMATION_TYPE | EVENTLOG_WARNING_TYPE | EVENTLOG_ERROR_TYPE;
   RegSetValueEx(key, _T("TypesSupported"), 0, REG_DWORD, (const unsigned char *) &types, sizeof(types));
 
+  RegCloseKey(key);
   return 0;
 }
 
@@ -664,7 +665,14 @@ void override_milliseconds(TCHAR *service_name, HKEY key, TCHAR *value, unsigned
       else log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_QUERYVALUE_FAILED, value, error_string(ret), 0);
     }
   }
-  else ok = true;
+  else {
+    if (type == REG_DWORD && buflen == sizeof(unsigned long)) ok = true;
+    else {
+      TCHAR milliseconds[16];
+      _sntprintf_s(milliseconds, _countof(milliseconds), _TRUNCATE, _T("%lu"), default_value);
+      log_event(EVENTLOG_WARNING_TYPE, event, service_name, value, milliseconds, 0);
+    }
+  }
 
   if (! ok) *buffer = default_value;
 }
@@ -683,18 +691,19 @@ HKEY open_service_registry(const TCHAR *service_name, REGSAM sam, bool must_exis
 
 /* Open a subkey of the service Services\<service_name>\<sub>. */
 long open_registry(const TCHAR *service_name, const TCHAR *sub, REGSAM sam, HKEY *key, bool must_exist) {
+  if (key) *key = 0;
   /* Get registry */
   TCHAR registry[KEY_LENGTH];
   if (service_registry_path(service_name, true, sub, registry, _countof(registry)) < 0) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_OUT_OF_MEMORY, NSSM_REGISTRY, _T("open_registry()"), 0);
-    return 0;
+    return ERROR_OUTOFMEMORY;
   }
 
   return open_registry_key(registry, sam, key, must_exist);
 }
 
 HKEY open_registry(const TCHAR *service_name, const TCHAR *sub, REGSAM sam, bool must_exist) {
-  HKEY key;
+  HKEY key = 0;
   long error = open_registry(service_name, sub, sam, &key, must_exist);
   return key;
 }

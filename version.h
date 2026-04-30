@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#define NSSM_VERSION _T("2.25.0")
-#define NSSM_VERSIONINFO 2,25,0,0
+#define NSSM_VERSION _T("3.0.0")
+#define NSSM_VERSIONINFO 3,0,0,0
 #define NSSM_DATE _T(__DATE__)  /* 编译日期，例如 "Nov 11 2025" */
 #define NSSM_FILEFLAGS 0L
 #define NSSM_COPYRIGHT _T("Public Domain; Author fightroad")

@@ -185,7 +185,8 @@ void check_admin() {
   PSID AdministratorsGroup;
   SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
   if (! AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &AdministratorsGroup)) return;
-  CheckTokenMembership(0, AdministratorsGroup, /*XXX*/(PBOOL) &is_admin);
+  BOOL admin = FALSE;
+  if (CheckTokenMembership(0, AdministratorsGroup, &admin)) is_admin = (admin != FALSE);
   FreeSid(AdministratorsGroup);
 }
 

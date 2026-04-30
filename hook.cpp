@@ -363,6 +363,8 @@ int nssm_hook(hook_thread_t *hook_threads, nssm_service_t *service, TCHAR *hook_
     hook->pid = pi.dwProcessId;
     hook->deadline = deadline;
     if (get_process_creation_time(hook->process_handle, &hook->creation_time)) GetSystemTimeAsFileTime(&hook->creation_time);
+    /* We never use the primary thread handle. */
+    if (pi.hThread) CloseHandle(pi.hThread);
 
     unsigned long tid;
     HANDLE thread_handle = CreateThread(NULL, 0, await_hook, (void *) hook, 0, &tid);
@@ -382,9 +384,11 @@ int nssm_hook(hook_thread_t *hook_threads, nssm_service_t *service, TCHAR *hook_
     }
     else {
       log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_CREATETHREAD_FAILED, error_string(GetLastError()), 0);
+      /*
+        await_hook() is responsible for closing handles and freeing hook.
+        Don't touch hook after calling it.
+      */
       await_hook(hook);
-      if (hook->name) HeapFree(GetProcessHeap(), 0, hook->name);
-      HeapFree(GetProcessHeap(), 0, hook);
     }
   }
   else {

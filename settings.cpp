@@ -249,7 +249,7 @@ static int setting_dump_exit_action(const TCHAR *service_name, void *param, cons
     int i;
     for (i = 0; i < _countof(code); i++) {
       if (! code[i]) break;
-      if (code[i] >= _T('0') || code[i] <= _T('9')) continue;
+      if (code[i] >= _T('0') && code[i] <= _T('9')) continue;
       valid = false;
       break;
     }
@@ -269,14 +269,20 @@ static int setting_dump_exit_action(const TCHAR *service_name, void *param, cons
 }
 
 static inline bool split_hook_name(const TCHAR *hook_name, TCHAR *hook_event, TCHAR *hook_action) {
-  TCHAR *s;
-
-  for (s = (TCHAR *) hook_name; *s; s++) {
+  const TCHAR *slash = 0;
+  for (const TCHAR *s = hook_name; *s; s++) {
     if (*s == _T('/')) {
-      *s = _T('\0');
-      _sntprintf_s(hook_event, HOOK_NAME_LENGTH, _TRUNCATE, _T("%s"), hook_name);
-      *s++ = _T('/');
-      _sntprintf_s(hook_action, HOOK_NAME_LENGTH, _TRUNCATE, _T("%s"), s);
+      slash = s;
+      break;
+    }
+  }
+
+  if (slash) {
+    size_t event_len = (size_t) (slash - hook_name);
+    if (event_len && event_len < HOOK_NAME_LENGTH && slash[1]) {
+      memmove(hook_event, hook_name, event_len * sizeof(TCHAR));
+      hook_event[event_len] = _T('\0');
+      _sntprintf_s(hook_action, HOOK_NAME_LENGTH, _TRUNCATE, _T("%s"), slash + 1);
       return valid_hook_name(hook_event, hook_action, false);
     }
   }
@@ -1254,37 +1260,18 @@ int native_set_type(const TCHAR *service_name, void *param, const TCHAR *name, v
     return -1;
   }
 
-  /*
-    We can only manage services of type SERVICE_WIN32_OWN_PROCESS
-    and SERVICE_INTERACTIVE_PROCESS.
-  */
-  unsigned long type = SERVICE_WIN32_OWN_PROCESS;
-  if (str_equiv(value->string, NSSM_INTERACTIVE_PROCESS)) type |= SERVICE_INTERACTIVE_PROCESS;
+  /* Project baseline is Windows 7+: interactive services are unsupported. */
+  if (str_equiv(value->string, NSSM_INTERACTIVE_PROCESS)) {
+    _ftprintf(stderr, _T("Interactive services are not supported on Windows 7 and newer.\n"));
+    return -1;
+  }
   else if (! str_equiv(value->string, NSSM_WIN32_OWN_PROCESS)) {
     print_message(stderr, NSSM_MESSAGE_INVALID_SERVICE_TYPE, value->string);
     _ftprintf(stderr, _T("%s\n"), NSSM_WIN32_OWN_PROCESS);
-    _ftprintf(stderr, _T("%s\n"), NSSM_INTERACTIVE_PROCESS);
     return -1;
   }
 
-  /*
-    ChangeServiceConfig() will fail if the service runs under an account
-    other than LOCALSYSTEM and we try to make it interactive.
-  */
-  if (type & SERVICE_INTERACTIVE_PROCESS) {
-    QUERY_SERVICE_CONFIG *qsc = query_service_config(service_name, service_handle);
-    if (! qsc) return -1;
-
-    if (! str_equiv(qsc->lpServiceStartName, NSSM_LOCALSYSTEM_ACCOUNT)) {
-      HeapFree(GetProcessHeap(), 0, qsc);
-      print_message(stderr, NSSM_MESSAGE_INTERACTIVE_NOT_LOCALSYSTEM, value->string, service_name, NSSM_LOCALSYSTEM_ACCOUNT);
-      return -1;
-    }
-
-    HeapFree(GetProcessHeap(), 0, qsc);
-  }
-
-  if (! ChangeServiceConfig(service_handle, type, SERVICE_NO_CHANGE, SERVICE_NO_CHANGE, 0, 0, 0, 0, 0, 0, 0)) {
+  if (! ChangeServiceConfig(service_handle, SERVICE_WIN32_OWN_PROCESS, SERVICE_NO_CHANGE, SERVICE_NO_CHANGE, 0, 0, 0, 0, 0, 0, 0)) {
     print_message(stderr, NSSM_MESSAGE_CHANGESERVICECONFIG_FAILED, error_string(GetLastError()));
     return -1;
   }

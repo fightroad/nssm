@@ -120,7 +120,7 @@ Language = English
 To remove a service without confirmation: nssm remove <servicename> confirm
 .
 Language = Chinese
-无需确认直接移除：nssm remove <servicename> confirm
+无需确认直接移除：nssm remove <服务名> confirm
 .
 
 MessageId = +1
@@ -1093,7 +1093,7 @@ Language = English
 No action (srvany compatible)%0
 .
 Language = Chinese
-无操作（与srvany兼容）%0
+无操作（与 srvany 兼容）%0
 .
 
 MessageId = +1
@@ -1113,7 +1113,7 @@ Language = English
 Fake crash (pre-Vista)%0
 .
 Language = Chinese
-假崩溃（Vista之前）%0
+假崩溃（Vista 之前）%0
 .
 
 MessageId = +1
@@ -1185,9 +1185,9 @@ specifies more CPUs than are present on this system.  Editing the
 service will result in additional CPUs being removed.
 .
 Language = Chinese
-该服务配置的处理器关联范围
-指定的CPU数量超过此系统上的CPU数量。编辑
-服务将导致移除多余的CPU。
+该服务配置的处理器亲和范围中，指定的 CPU 数量
+超过了当前系统的 CPU 数量。编辑服务将导致
+移除多余的 CPU。
 .
 
 MessageId = +1
@@ -1197,7 +1197,7 @@ Language = English
 No CPUs selected!
 .
 Language = Chinese
-没有选择CPU！
+没有选择 CPU！
 .
 
 MessageId = +1
@@ -1209,9 +1209,9 @@ represented by this GUI's simplified set of options.  Check the registry
 after editing the service to confirm its I/O redirection settings.
 .
 Language = Chinese
-该服务配置了I/O重定向设置，但无法更改
-由这个GUI的简化选项集表示。检查注册表
-编辑服务以确认其I/O重定向设置后。
+该服务配置的 I/O 重定向设置无法由当前 GUI 的
+简化选项完整表示。编辑服务后，请检查注册表
+以确认其 I/O 重定向设置。
 .
 
 MessageId = +1
@@ -1223,9 +1223,9 @@ rotation.  This GUI can only display 32-bit settings.  Check the registry
 after editing the service to confirm its file rotation settings.
 .
 Language = Chinese
-该服务为文件配置了64位文件大小阈值
-此GUI只能显示32位设置。检查注册表
-编辑服务后，确认其文件rotation设置。
+该服务为文件配置了 64 位文件大小阈值
+此 GUI 只能显示 32 位设置。编辑服务后，
+请检查注册表以确认其文件轮转设置。
 .
 
 MessageId = +1
@@ -1238,10 +1238,10 @@ can only display one such block.  Editing the service will result in
 one of the environment blocks being deleted.
 .
 Language = Chinese
-该服务配置有一个与srvany兼容的环境块
-用于应用程序以及一个额外的环境块。这个图形用户界面
-只能显示一个这样的块。编辑该服务将导致
-正在删除的环境块之一。
+该服务配置有一个与 srvany 兼容的环境块
+用于应用程序以及一个额外的环境块。此 GUI
+只能显示其中一个环境块。编辑该服务后，
+其中一个环境块将被删除。
 .
 
 MessageId = +1
@@ -1301,7 +1301,7 @@ Language = English
 Log rotation%0
 .
 Language = Chinese
-Log日志 rotation%0
+日志轮转%0
 .
 
 MessageId = +1
@@ -1371,7 +1371,7 @@ Language = English
 Before online log rotation%0
 .
 Language = Chinese
-在线日志rotation之前%0
+在线日志轮转前%0
 .
 
 MessageId = +1
@@ -1381,7 +1381,7 @@ Language = English
 After online log rotation%0
 .
 Language = Chinese
-在线日志rotation之后%0
+在线日志轮转后%0
 .
 
 MessageId = 1001
@@ -1564,7 +1564,7 @@ Service %1 action for exit code %2 is %3.
 Exiting.
 .
 Language = Chinese
-退出代码%2的服务%1操作为%3。
+服务 %1 对退出码 %2 的处理动作为 %3。
 退出。
 .
 

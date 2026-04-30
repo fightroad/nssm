@@ -55,7 +55,6 @@
 #define IDC_DESCRIPTION                 1034
 #define IDC_STARTUP                     1035
 #define IDC_LOCALSYSTEM                 1036
-#define IDC_INTERACT                    1037
 #define IDC_ACCOUNT                     1038
 #define IDC_USERNAME                    1039
 #define IDC_PASSWORD1                   1040

@@ -29,9 +29,7 @@ static HWND dialog(const TCHAR *templ, HWND parent, DLGPROC function) {
   return dialog(templ, parent, function, 0);
 }
 
-static inline void set_logon_enabled(unsigned char interact_enabled, unsigned char credentials_enabled) {
-  /* Project baseline is Windows 7+: interactive services are unsupported. */
-  EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_INTERACT), 0);
+static inline void set_logon_enabled(unsigned char credentials_enabled) {
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_USERNAME), credentials_enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD1), credentials_enabled);
   EnableWindow(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_PASSWORD2), credentials_enabled);
@@ -99,17 +97,16 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (service->username) {
       if (is_virtual_account(service->name, service->username)) {
         CheckRadioButton(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, IDC_VIRTUAL_SERVICE, IDC_VIRTUAL_SERVICE);
-        set_logon_enabled(0, 0);
+        set_logon_enabled(0);
       }
       else {
         CheckRadioButton(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, IDC_VIRTUAL_SERVICE, IDC_ACCOUNT);
         SetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_USERNAME, service->username);
-        set_logon_enabled(0, 1);
+        set_logon_enabled(1);
       }
     }
     else {
       CheckRadioButton(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, IDC_VIRTUAL_SERVICE, IDC_LOCALSYSTEM);
-      SendDlgItemMessage(tablist[NSSM_TAB_LOGON], IDC_INTERACT, BM_SETCHECK, BST_UNCHECKED, 0);
     }
 
     /* Dependencies tab. */
@@ -1062,15 +1059,15 @@ INT_PTR CALLBACK tab_dlg(HWND tab, UINT message, WPARAM w, LPARAM l) {
 
         /* Log on. */
         case IDC_LOCALSYSTEM:
-          set_logon_enabled(1, 0);
+          set_logon_enabled(0);
           break;
 
         case IDC_VIRTUAL_SERVICE:
-          set_logon_enabled(0, 0);
+          set_logon_enabled(0);
           break;
 
         case IDC_ACCOUNT:
-          set_logon_enabled(0, 1);
+          set_logon_enabled(1);
           break;
 
         /* Affinity. */
@@ -1207,7 +1204,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
 
       /* Set defaults. */
       CheckRadioButton(tablist[NSSM_TAB_LOGON], IDC_LOCALSYSTEM, IDC_ACCOUNT, IDC_LOCALSYSTEM);
-      set_logon_enabled(1, 0);
+      set_logon_enabled(0);
 
       /* Dependencies tab. */
       tab_insert_message_string(tabs, NSSM_TAB_DEPENDENCIES, NSSM_GUI_TAB_DEPENDENCIES);

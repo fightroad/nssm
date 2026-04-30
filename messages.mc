@@ -1110,10 +1110,10 @@ MessageId = +1
 SymbolicName = NSSM_GUI_EXIT_UNCLEAN
 Severity = Informational
 Language = English
-Fake crash (pre-Vista)%0
+Legacy compatibility mode%0
 .
 Language = Chinese
-假崩溃（Vista 之前）%0
+假崩溃（遗留兼容）%0
 .
 
 MessageId = +1

@@ -7,6 +7,9 @@ static enum { NSSM_TAB_APPLICATION, NSSM_TAB_DETAILS, NSSM_TAB_LOGON, NSSM_TAB_D
 static HWND tablist[NSSM_NUM_TABS];
 static int selected_tab;
 
+static void combo_insert_message_string(HWND combo, WPARAM index, unsigned long id);
+static void tab_insert_message_string(HWND tabs, WPARAM index, unsigned long id);
+
 static HWND dialog(const TCHAR *templ, HWND parent, DLGPROC function, LPARAM l) {
   /* The caller will deal with GetLastError()... */
   HRSRC resource = FindResourceEx(0, RT_DIALOG, templ, GetUserDefaultLangID());
@@ -962,34 +965,39 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
   ofn.lStructSize = sizeof(ofn);
   ofn.lpstrFilter = (TCHAR *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, bufsize * sizeof(TCHAR));
   if (ofn.lpstrFilter) {
+    TCHAR *filter_buffer = (TCHAR *) ofn.lpstrFilter;
     /* "Applications" + NULL + "*.exe" + NULL */
     va_start(arg, flags);
     while (i = va_arg(arg, int)) {
       TCHAR *localised = message_string(i);
       if (localised) {
-        if (append_browse_filter_part((TCHAR **) &ofn.lpstrFilter, &bufsize, &len, localised)) {
+        if (append_browse_filter_part(&filter_buffer, &bufsize, &len, localised)) {
+          ofn.lpstrFilter = filter_buffer;
           /* Fall back to a safe filter on allocation failure. */
-          ZeroMemory(ofn.lpstrFilter, bufsize * sizeof(TCHAR));
-          _sntprintf_s(ofn.lpstrFilter, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
-          len = _tcslen(ofn.lpstrFilter) + 1;
-          ofn.lpstrFilter[len] = _T('\0');
+          ZeroMemory(filter_buffer, bufsize * sizeof(TCHAR));
+          _sntprintf_s(filter_buffer, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
+          len = _tcslen(filter_buffer) + 1;
+          filter_buffer[len] = _T('\0');
           free_message_string(localised);
           break;
         }
         free_message_string(localised);
       }
       TCHAR *filter = browse_filter(i);
-      if (append_browse_filter_part((TCHAR **) &ofn.lpstrFilter, &bufsize, &len, filter)) {
-        ZeroMemory(ofn.lpstrFilter, bufsize * sizeof(TCHAR));
-        _sntprintf_s(ofn.lpstrFilter, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
-        len = _tcslen(ofn.lpstrFilter) + 1;
-        ofn.lpstrFilter[len] = _T('\0');
+      if (append_browse_filter_part(&filter_buffer, &bufsize, &len, filter)) {
+        ofn.lpstrFilter = filter_buffer;
+        ZeroMemory(filter_buffer, bufsize * sizeof(TCHAR));
+        _sntprintf_s(filter_buffer, bufsize, _TRUNCATE, _T("%s"), browse_filter(NSSM_GUI_BROWSE_FILTER_ALL_FILES));
+        len = _tcslen(filter_buffer) + 1;
+        filter_buffer[len] = _T('\0');
         break;
       }
+      ofn.lpstrFilter = filter_buffer;
     }
     va_end(arg);
     /* Ensure double-NULL termination. */
-    if (len + 1 < bufsize) ofn.lpstrFilter[len] = _T('\0');
+    if (len + 1 < bufsize) filter_buffer[len] = _T('\0');
+    ofn.lpstrFilter = filter_buffer;
   }
   ofn.lpstrFile = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, PATH_LENGTH * sizeof(TCHAR));
   if (ofn.lpstrFile) {
